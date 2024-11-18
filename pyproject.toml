@@ -1,0 +1,18 @@
+[project]
+name = "auspolls"
+description = "Australia Polling"
+version = "1.0.0"
+authors = [
+    { name = "Sam Vaughan", email = "samvaughan01@gmail.com" }
+]
+dependencies = [
+    "numpy",
+    "astropy",
+    "matplotlib",
+    "pandas"
+]
+
+[project.optional-dependencies]
+dev = [
+    "tox"
+]

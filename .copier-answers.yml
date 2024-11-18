@@ -1,0 +1,9 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 940ecd7
+_src_path: git+https://github.com/samvaughan/spv-copier-template
+copyright_date: '2024'
+email: samvaughan01@gmail.com
+github_repo_name: auspolls
+name: Sam Vaughan
+project_description: Australia Polling
+project_name: AusPolls

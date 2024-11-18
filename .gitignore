@@ -1,0 +1,6 @@
+*.DS_Store
+*.fits
+
+# Ignore the Inference data
+src/data/InferenceData/*
+src/data/ModelData/*

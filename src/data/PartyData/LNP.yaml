@@ -1,0 +1,8 @@
+party_long_name: "LNP (Primary)"
+party_column_name: "LNP"
+
+# Modelling
+additional_variance: 0.0
+
+# Plotting
+main_colour: "#1c4f9c"

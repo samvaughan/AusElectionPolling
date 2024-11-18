@@ -1,0 +1,8 @@
+party_long_name: "Green Party"
+party_column_name: "GRN"
+
+# Modelling
+additional_variance: 0.0
+
+# Plotting
+main_colour: "#008943"

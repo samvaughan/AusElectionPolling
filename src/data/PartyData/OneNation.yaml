@@ -1,0 +1,8 @@
+party_long_name: "One Nation"
+party_column_name: "PHON"
+
+# Modelling
+additional_variance: 0.0
+
+# Plotting
+main_colour: "#f36c21"

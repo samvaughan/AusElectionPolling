@@ -1,0 +1,8 @@
+party_long_name: "ALP (2 party preferred)"
+party_column_name: "ALP_2pp"
+
+# Modelling
+additional_variance: 0.0
+
+# Plotting
+main_colour: "#e53440"
