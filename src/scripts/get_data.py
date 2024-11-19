@@ -7,20 +7,6 @@ import numpy as np
 URL = "https://www.pollbludger.net/fed2025/bludgertrack/polldata.htm?"
 output_filename = "src/data/Polls/poll_data_latest.csv"
 
-options = ChromiumOptions()
-options.add_argument("--headless=new")
-driver = webdriver.Chrome(options=options)
-
-print("Loading the webpage...")
-driver.get(URL)
-page_source = driver.page_source
-driver.quit()
-
-# Parse the HTML
-print("Parsing the HTML")
-soup = bs4.BeautifulSoup(page_source, "html.parser")
-
-
 # Columns in the table
 # everything with the r/a are the respondents preference choices
 # We'll only use these when 2pp from historical preference data isn't available
@@ -43,15 +29,38 @@ columns = [
     "UND r/a",
 ]
 
-data = []
-for tr in soup.find("table").find_all("tr"):
-    row = [td.text for td in tr.find_all("td")]
-    # If want to filter out all except LA then can do that here
-    data.append(row)
+options = ChromiumOptions()
+options.add_argument("--headless=new")
+driver = webdriver.Chrome(options=options)
 
-# First entry seems to be the entire table? And second is blank
-df = pd.DataFrame(data[2:], columns=columns)
 
+print("Loading the webpage...")
+driver.get(URL)
+
+
+df = pd.DataFrame()
+print("Parsing the HTML")
+for state in [None, "nsw", "vic", "qld", "wa", "sa", "tas"]:
+
+    # Parse the HTML
+    if state is not None:
+        print(f"\tState: {state}")
+        button = driver.find_element(by="id", value=state)
+        button.click()
+    page_source = driver.page_source
+    soup = bs4.BeautifulSoup(page_source, "html.parser")
+
+    data = []
+    for tr in soup.find("table").find_all("tr"):
+        row = [td.text for td in tr.find_all("td")]
+        # If want to filter out all except LA then can do that here
+        data.append(row)
+
+    # First entry seems to be the entire table? And second is blank
+    tmp_df = pd.DataFrame(data[2:], columns=columns)
+    df = pd.concat((df, tmp_df))
+
+driver.quit()
 
 print("Changing the column types...")
 # Fix up our column types

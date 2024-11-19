@@ -4,27 +4,31 @@ import arviz as az
 import numpy as np
 from datetime import datetime
 import pickle
-import yaml
-import argparse
+
+# import argparse
 from src.scripts import utils
 
-parser = argparse.ArgumentParser()
-parser.add_argument("yaml_file")
-args = parser.parse_args()
+# parser = argparse.ArgumentParser()
+# parser.add_argument("yaml_file")
+# args = parser.parse_args()
 
 
-with open(args.yaml_file, "r") as f:
-    params = yaml.safe_load(f)
+# with open(args.yaml_file, "r") as f:
+#     params = yaml.safe_load(f)
+
+first_pref_or_2pp = "2pp"
 
 date = datetime.today().strftime("%Y%m%d")
-party_long_name = params["party_long_name"]
-party_column_name = params["party_column_name"]
-additional_variance = params["additional_variance"]
+# party_long_name = params["party_long_name"]
+# party_column_name = params["party_column_name"]
+# additional_variance = params["additional_variance"]
 
 # make the filenames
 netcdf_filename, model_data_filename, model_df_filename, election_data_filename = (
-    utils.get_filenames(party_column_name, date)
+    utils.get_filenames(date, first_pref_or_2pp=first_pref_or_2pp)
 )
+print(f"Saving fit to {netcdf_filename}\n")
+
 
 df = pd.read_csv(
     "src/data/Polls/poll_data_latest.csv",
@@ -34,17 +38,28 @@ df = pd.read_csv(
 # Only select national polls here
 df = df.loc[df.Scope == "NAT"]
 
+
+if first_pref_or_2pp == "first_preference":
+    party_columns = ["ALP", "LNP", "GRN", "PHON"]
+elif first_pref_or_2pp == "2pp":
+    party_columns = ["ALP_2pp", "LNP_2pp"]
+else:
+    raise NameError("Must be one of 'first_preference' or '2pp'")
+
 # Encode the pollster
 df["PollName"] = pd.Categorical(df["PollName"])
 # Note that we don't have to subtract 1 here as the 0th category is the election
 df["PollName_Encoded"] = df["PollName"].cat.codes
 
+# Encode the parties
+N_parties = len(party_columns)
+
 # Take the poll as occuring at the middle of the range
 # Can do a better job here...
 df["PollDate"] = df.StartDate + 0.5 * (df.EndDate - df.StartDate)
 
-election_data = df.iloc[0]
-df = df.drop(0)
+election_data = df.loc[df.PollName == "Election"]
+df = df.drop(election_data.index)
 
 # Find the time since the election
 df["N_Days"] = (df.EndDate - df.StartDate.iloc[0]).dt.days.astype(int)
@@ -70,26 +85,27 @@ df["MarkerShape"] = df.PollName.map(marker_dict)
 N_pollsters = len(df.PollName_Encoded.unique())
 
 # Date we want to have our predictions on
-prediction_date = (datetime.today() - election_data.StartDate).days
+prediction_date = (datetime.today() - election_data.loc[0, "StartDate"]).days
 
 # Drop the NAs if they exist
-df = df.dropna(subset=[party_column_name])
+df = df.dropna(subset=party_columns)
 
 
 # Now lay out all of the data
 data = dict(
     N_polls=len(df),
     N_pollsters=N_pollsters,
+    N_parties=N_parties,
     N_days=df["N_Days"],
     PollName_Encoded=df["PollName_Encoded"],
     prediction_date=prediction_date,
     survey_size=df["Sample"],
-    poll_result=(df[party_column_name] / 100),
-    election_result_2022=election_data[party_column_name] / 100,
-    additional_variance=additional_variance,
+    poll_result=(df.loc[:, party_columns].values / 100),
+    election_result_2022=election_data.loc[:, party_columns].values.squeeze() / 100,
+    additional_variance=0.0,
 )
 
-model = cmdstanpy.CmdStanModel(stan_file="src/scripts/latent_vote.stan")
+model = cmdstanpy.CmdStanModel(stan_file="src/scripts/latent_vote_all_parties.stan")
 
 fit = model.sample(data=data, max_treedepth=14)
 
@@ -98,10 +114,11 @@ fit = model.sample(data=data, max_treedepth=14)
 coords = {
     "pollster": df["PollName"].cat.categories[1:],
     "time": np.arange(data["prediction_date"]),
+    "party": party_columns,
 }
 dims = {
-    "mu": ["time"],
-    "house_effects": ["pollster"],
+    "mu": ["party", "time"],
+    "house_effects": ["party", "pollster"],
 }
 trace = az.from_cmdstanpy(
     posterior=fit,
