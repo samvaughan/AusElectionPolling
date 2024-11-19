@@ -14,7 +14,7 @@ data{
     // Sample size for each election
     array[N_polls] int survey_size;
     // Result of the poll
-    array[N_parties] vector[N_polls] poll_result;
+    array[N_polls] vector[N_parties] poll_result;
 
     // Result of the election in 2022
     vector[N_parties] election_result_2022;
@@ -25,19 +25,19 @@ data{
 }
 
 transformed data {
-   array[N_parties] vector[N_polls] poll_var;
+   array[N_polls] vector[N_parties] poll_var;
 
-   for (i in 1:N_parties) {
-    for (j in 1:N_polls){
+   for (i in 1:N_polls) {
+    for (j in 1:N_parties){
         poll_var[i, j] = poll_result[i, j] * (1 - poll_result[i, j]) / survey_size[j];
       }
    }
 }
 
 parameters {
-  array[N_parties] row_vector[prediction_date] mu;
-  array[N_parties] row_vector[N_pollsters] house_effects;
-  real<lower=0> sigma;
+  array[prediction_date] row_vector[N_parties] mu;
+  array[N_pollsters] row_vector[N_parties] house_effects;
+  vector<lower=0>[N_parties] sigma;
   //real<lower=1> nu;
   real<lower=0> time_variation_factor;
   real<lower=1> time_variation_day_scale;
@@ -72,24 +72,24 @@ model{
     sigma ~ normal(0.0, 0.1);
 
     // "Measurement" on election day 2022 with a very small error
-    for (p in 1:N_parties){
-      mu[p, 1] ~ normal(election_result_2022[p], 0.0001);
+
+    mu[1] ~ normal(election_result_2022, 0.0001);
+
+    for (p in 1:N_pollsters){
+      house_effects[p] ~ normal(0, 0.05);
     }
-    // Prior on the house effects
-    house_effects ~ normal(0, 0.05);
-
     //nu ~ gamma(2,0.1);
-
     time_variation_factor ~ normal(0.0, 0.01);
     time_variation_day_scale ~ normal(0, 30);
 
     // state model
-    for (p in 1:N_parties){
-      mu[p, 2:prediction_date] ~ normal(mu[p, 1:(prediction_date- 1)], (sigma + time_variation_sigma[1:(prediction_date -1)]));
+    for (t in 2:prediction_date){
+      mu[t] ~ normal(mu[t-1], (sigma + time_variation_sigma[t]));
+    }
 
+    for (t in 1:N_polls){
       // add in the polls on each day
-      poll_result[p] ~ normal(mu[p, N_days] + house_effects[PollName_Encoded], sqrt(poll_var[p] + additional_variance));
-
+      poll_result[t] ~ normal(mu[t] + house_effects[PollName_Encoded[t]], sqrt(poll_var[t] + additional_variance));
     }
 
 
