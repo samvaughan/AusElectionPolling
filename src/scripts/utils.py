@@ -78,13 +78,8 @@ def make_all_state_space_plots(trace, data, df, election_date, parties):
     fig, ax = plt.subplots(figsize=(10, 6), layout="constrained")
     for p, party in enumerate(parties):
         colour = get_colour(party)
-
-        # Make the y errors
-        y_errors = np.sqrt(
-            data["poll_result"][p] * (1 - data["poll_result"][p]) / data["survey_size"]
-        )
         tmp_data = data.copy()
-        tmp_data["poll_result"] = data["poll_result"][p]
+        tmp_data["poll_result"] = data["poll_result"][:, p]
 
         make_state_space_plot(
             trace.sel(party=party),
@@ -92,7 +87,7 @@ def make_all_state_space_plots(trace, data, df, election_date, parties):
             df,
             election_date,
             colour=colour,
-            y_errors=y_errors,
+            y_errors=np.sqrt(data["poll_variance"])[:, p],
             fig=fig,
             ax=ax,
             label=party,

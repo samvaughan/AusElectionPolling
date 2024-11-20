@@ -34,6 +34,7 @@ df["N_Days"] = (df.endDate - start_date).dt.days.astype(int)
 
 # Coerce to integers
 df["Sample"] = df["sampleSize"].astype(int)
+df["PollError"] = np.sqrt((df["ALP"] / 100) * (1 - df["ALP"] / 100) / df["Sample"])
 
 # Add a different marker style for each pollster
 marker_dict = {
@@ -62,11 +63,10 @@ data = dict(
     N_days=df["N_Days"],
     PollName_Encoded=df["PollName_Encoded"] + 1,
     prediction_date=prediction_date,
-    survey_size=df["Sample"],
+    poll_error=df["PollError"],
     poll_result=(df["ALP"] / 100),
     election_result_start=election_start / 100,
     election_result_finish=election_end / 100,
-    additional_variance=0.0,
 )
 
 model = cmdstanpy.CmdStanModel(

@@ -23,8 +23,10 @@ additional_variance = params["additional_variance"]
 
 # make the filenames
 netcdf_filename, model_data_filename, model_df_filename, election_data_filename = (
-    utils.get_filenames(party_column_name, date)
+    utils.get_filenames_single_party(party_column_name, date)
 )
+
+print(f"Saving to {netcdf_filename}...")
 
 df = pd.read_csv(
     "src/data/Polls/poll_data_latest.csv",
@@ -51,6 +53,11 @@ df["N_Days"] = (df.EndDate - df.StartDate.iloc[0]).dt.days.astype(int)
 
 # Coerce to integers
 df["Sample"] = df["Sample"].astype(int)
+df["PollError"] = np.sqrt(
+    (df[party_column_name] / 100) * (1 - df[party_column_name] / 100) / df["Sample"]
+)
+
+incumbent = (party_column_name == "ALP") | (party_column_name == "ALP_2pp")
 
 # Add a different marker style for each pollster
 marker_dict = {
@@ -83,15 +90,17 @@ data = dict(
     N_days=df["N_Days"],
     PollName_Encoded=df["PollName_Encoded"],
     prediction_date=prediction_date,
+    poll_error=df["PollError"],
     survey_size=df["Sample"],
     poll_result=(df[party_column_name] / 100),
     election_result_2022=election_data[party_column_name] / 100,
     additional_variance=additional_variance,
+    incumbent=incumbent,
 )
 
 model = cmdstanpy.CmdStanModel(stan_file="src/scripts/latent_vote.stan")
 
-fit = model.sample(data=data, max_treedepth=14)
+fit = model.sample(data=data, max_treedepth=14, adapt_delta=0.95)
 
 
 # Turn this into inference data

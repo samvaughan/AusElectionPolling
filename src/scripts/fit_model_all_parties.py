@@ -16,7 +16,7 @@ from src.scripts import utils
 # with open(args.yaml_file, "r") as f:
 #     params = yaml.safe_load(f)
 
-first_pref_or_2pp = "2pp"
+first_pref_or_2pp = "first_preference"
 
 date = datetime.today().strftime("%Y%m%d")
 # party_long_name = params["party_long_name"]
@@ -41,8 +41,10 @@ df = df.loc[df.Scope == "NAT"]
 
 if first_pref_or_2pp == "first_preference":
     party_columns = ["ALP", "LNP", "GRN", "PHON"]
+    incumbent = [1, 0, 0, 0]
 elif first_pref_or_2pp == "2pp":
     party_columns = ["ALP_2pp", "LNP_2pp"]
+    incumbent = [1, 0]
 else:
     raise NameError("Must be one of 'first_preference' or '2pp'")
 
@@ -56,7 +58,7 @@ N_parties = len(party_columns)
 
 # Take the poll as occuring at the middle of the range
 # Can do a better job here...
-df["PollDate"] = df.StartDate + 0.5 * (df.EndDate - df.StartDate)
+df["PollDate"] = df.EndDate
 
 election_data = df.loc[df.PollName == "Election"]
 df = df.drop(election_data.index)
@@ -64,8 +66,6 @@ df = df.drop(election_data.index)
 # Find the time since the election
 df["N_Days"] = (df.EndDate - df.StartDate.iloc[0]).dt.days.astype(int)
 
-# Coerce to integers
-df["Sample"] = df["Sample"].astype(int)
 
 # Add a different marker style for each pollster
 marker_dict = {
@@ -90,6 +90,12 @@ prediction_date = (datetime.today() - election_data.loc[0, "StartDate"]).days
 # Drop the NAs if they exist
 df = df.dropna(subset=party_columns)
 
+# Make the errors for each poll
+# Coerce to integers
+df["Sample"] = df["Sample"].astype(int)
+# Make the variance
+r = df.loc[:, party_columns].values / 100
+poll_variance = r * (1 - r) / df["Sample"].values[:, None]
 
 # Now lay out all of the data
 data = dict(
@@ -99,15 +105,18 @@ data = dict(
     N_days=df["N_Days"],
     PollName_Encoded=df["PollName_Encoded"],
     prediction_date=prediction_date,
+    poll_variance=poll_variance,
     survey_size=df["Sample"],
     poll_result=(df.loc[:, party_columns].values / 100),
     election_result_2022=election_data.loc[:, party_columns].values.squeeze() / 100,
-    additional_variance=0.0,
+    additional_variance=0.001,
+    incumbent=incumbent,
+    inflator=np.sqrt(2),
 )
 
 model = cmdstanpy.CmdStanModel(stan_file="src/scripts/latent_vote_all_parties.stan")
 
-fit = model.sample(data=data, max_treedepth=14)
+fit = model.sample(data=data)
 
 
 # Turn this into inference data
@@ -117,8 +126,10 @@ coords = {
     "party": party_columns,
 }
 dims = {
-    "mu": ["party", "time"],
-    "house_effects": ["party", "pollster"],
+    "mu": ["time", "party"],
+    "house_effects": ["pollster", "party"],
+    "sigma": ["party"],
+    "time_variation_sigma": ["time"],
 }
 trace = az.from_cmdstanpy(
     posterior=fit,

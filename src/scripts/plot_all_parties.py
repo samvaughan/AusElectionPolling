@@ -15,7 +15,7 @@ else:
     raise NameError("Must be one of 'first_preference' or '2pp'")
 
 
-date = "20241119"
+date = "20241120"
 
 # Filenames
 netcdf_filename, model_data_filename, model_df_filename, election_data_filename = (
@@ -34,4 +34,7 @@ with open(model_data_filename, "rb") as f:
     data = pickle.load(f)
 df = pd.read_csv(model_df_filename)
 
-utils.make_all_state_space_plots(trace, data, df, election_date, party_columns)
+fig, ax = utils.make_all_state_space_plots(
+    trace, data, df, election_date, party_columns
+)
+fig.savefig(f"{output_folder}/{first_pref_or_2pp}_{date}_latent_support.png")
