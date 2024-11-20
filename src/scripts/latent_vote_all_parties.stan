@@ -77,7 +77,7 @@ model{
     }
 
     //Election measurement
-    election_result_2022 ~ normal(mu[1], 0.001);
+    election_result_2022 ~ normal(mu[1], 0.1);
 
     // Poll measurement
     for (i in 1:N_polls){

@@ -38,3 +38,7 @@ fig, ax = utils.make_all_state_space_plots(
     trace, data, df, election_date, party_columns
 )
 fig.savefig(f"{output_folder}/{first_pref_or_2pp}_{date}_latent_support.png")
+
+# Plot the house effects
+fig, ax = utils.make_all_house_effects_plot(trace, party_columns)
+fig.savefig(f"{output_folder}/{first_pref_or_2pp}_{date}_house_effects.png")

@@ -166,10 +166,15 @@ def make_state_space_plot(
 
 def make_all_house_effects_plot(trace, parties):
 
-    fig, ax = plt.subplots(layout="constrained")
-    for party in parties:
+    if len(parties) == 2:
+        fig, axs = plt.subplots(layout="constrained", ncols=2)
+    else:
+        fig, axs = plt.subplots(layout="constrained", figsize=(15, 7), ncols=2, nrows=2)
+
+    for ax, party in zip(axs.ravel(), parties):
         colour = get_colour(party)
         make_house_effects_plot(trace.sel(party=party), colour=colour, fig=fig, ax=ax)
+        ax.set_title("")
     return fig, ax
 
 
@@ -193,6 +198,7 @@ def make_house_effects_plot(trace, colour, fig=None, ax=None):
         colors=[colour],
         linewidth=3.0,
         markersize=10,
+        hdi_prob=None,
     )
     ax.set_xlabel("House Effect (percentage points)")
     labels = []
@@ -244,5 +250,34 @@ def make_swing_plot(trace, data, colour, party_long_name, fig=None, ax=None):
         fontsize="xx-large",
         loc="left",
     )
+
+    return fig, ax
+
+
+def make_current_latent_value_plot(trace, parties):
+
+    colours = [get_colour(p) for p in trace.posterior.coords["party"].values]
+    latest_date = trace.posterior.coords["time"].values.max()
+    if len(parties) == 2:
+        fig, axs = plt.subplots(layout="constrained", ncols=2)
+    else:
+        fig, axs = plt.subplots(layout="constrained", figsize=(15, 7), ncols=2, nrows=2)
+    for ax, party, colour in zip(axs.ravel(), parties, colours):
+
+        az.plot_dist(
+            100 * trace.sel(party=party, time=latest_date).posterior.mu,
+            ax=ax,
+            kind="kde",
+            rug=True,
+            fill_kwargs=dict(alpha=0.3, color=colour),
+            color=colour,
+            rug_kwargs=dict(alpha=0.1, space=-1.1),
+            label=party,
+        )
+
+        ax.lines[1].set_linewidth(3.0)
+        ax.set_yticks([])
+
+    fig.suptitle("Current First Preference Voting Intention")
 
     return fig, ax
