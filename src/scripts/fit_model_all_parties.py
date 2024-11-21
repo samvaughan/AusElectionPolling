@@ -114,7 +114,9 @@ data = dict(
     inflator=np.sqrt(2),
 )
 
-model = cmdstanpy.CmdStanModel(stan_file="src/scripts/latent_vote_all_parties.stan")
+model = cmdstanpy.CmdStanModel(
+    stan_file="src/scripts/stan/latent_vote_all_parties.stan"
+)
 
 fit = model.sample(data=data)
 
