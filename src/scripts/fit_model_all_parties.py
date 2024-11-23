@@ -16,7 +16,7 @@ from src.scripts import utils
 # with open(args.yaml_file, "r") as f:
 #     params = yaml.safe_load(f)
 
-first_pref_or_2pp = "first_preference"
+first_pref_or_2pp = "2pp"
 
 date = datetime.today().strftime("%Y%m%d")
 # party_long_name = params["party_long_name"]
@@ -56,15 +56,16 @@ df["PollName_Encoded"] = df["PollName"].cat.codes
 # Encode the parties
 N_parties = len(party_columns)
 
-# Take the poll as occuring at the middle of the range
+# Take the poll as occuring at the end of the range
 # Can do a better job here...
 df["PollDate"] = df.EndDate
+
 
 election_data = df.loc[df.PollName == "Election"]
 df = df.drop(election_data.index)
 
 # Find the time since the election
-df["N_Days"] = (df.EndDate - df.StartDate.iloc[0]).dt.days.astype(int)
+df["N_Days"] = (df.EndDate - election_data.StartDate.iloc[0]).dt.days.astype(int)
 
 
 # Add a different marker style for each pollster
