@@ -79,15 +79,20 @@ def make_all_state_space_plots(trace, data, df, election_date, parties):
     for p, party in enumerate(parties):
         colour = get_colour(party)
         tmp_data = data.copy()
-        tmp_data["poll_result"] = data["poll_result"][:, p]
+        party_mask = data["party_index"] == p + 1
+        tmp_data["poll_result"] = data["poll_result"].loc[party_mask]
+        tmp_data["N_days"] = data["N_days"].loc[party_mask]
+        tmp_data["poll_variance"] = data["poll_variance"].loc[party_mask]
+        tmp_data["survey_size"] = data["survey_size"].loc[party_mask]
+        tmp_data["poll_variance"] = data["poll_variance"].loc[party_mask]
 
         make_state_space_plot(
             trace.sel(party=party),
             tmp_data,
-            df,
+            df.loc[party_mask],
             election_date,
             colour=colour,
-            y_errors=np.sqrt(data["poll_variance"])[:, p],
+            y_errors=np.sqrt(tmp_data["poll_variance"]),
             fig=fig,
             ax=ax,
             label=party,
@@ -130,10 +135,10 @@ def make_state_space_plot(
         markersize=5,
         alpha=0.3,
     )
-    for i in range(data["N_polls"]):
+    for i in range(len(data["poll_result"])):
         ax.scatter(
             xx[i],
-            data["poll_result"][i] * 100,
+            data["poll_result"].iloc[i] * 100,
             c=colour,
             marker=df["MarkerShape"].iloc[i],
             s=data["survey_size"].iloc[i] / 20,
