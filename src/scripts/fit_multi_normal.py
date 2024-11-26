@@ -36,36 +36,12 @@ df = pd.read_csv(
     index_col=0,
 )
 # Only select national polls here
-# df = df.loc[df.Scope == "NAT"]
+df = df.loc[df.Scope == "NAT"]
 
 
 if first_pref_or_2pp == "first_preference":
     # party_columns = ["ALP", "LNP", "GRN"]  # PHON
-    party_columns = (
-        [
-            "ALP_NAT",
-            "ALP_NSW",
-            "ALP_VIC",
-            "ALP_QLD",
-            "ALP_WA",
-            "ALP_SA",
-            "ALP_TAS",
-            "LNP_NAT",
-            "LNP_NSW",
-            "LNP_VIC",
-            "LNP_QLD",
-            "LNP_WA",
-            "LNP_SA",
-            "LNP_TAS",
-            "GRN_NAT",
-            "GRN_NSW",
-            "GRN_VIC",
-            "GRN_QLD",
-            "GRN_WA",
-            "GRN_SA",
-            "GRN_TAS",
-        ],
-    )
+    party_columns = ["ALP", "LNP", "GRN"]
     incumbent = [1, 0, 0]
 elif first_pref_or_2pp == "2pp":
     party_columns = ["ALP_2pp", "LNP_2pp"]
@@ -138,9 +114,9 @@ df = df.melt(
 )
 
 
-df["Party_Scope"] = df["Party"] + "_" + df["Scope"]
-df["Party_Scope"] = pd.Categorical(df.Party_Scope, categories=party_columns)
-df["PartyIndex"] = df["Party_Scope"].cat.codes + 1
+# df["Party_Scope"] = df["Party"] + "_" + df["Scope"]
+df["Party"] = pd.Categorical(df.Party, categories=party_columns)
+df["PartyIndex"] = df["Party"].cat.codes + 1
 
 # Make the errors for each poll
 # Coerce to integers
@@ -159,6 +135,9 @@ correlation_matrix = np.array(
         [-0.50838762, -0.89800079, 1.0],
     ]
 )
+cholesky_matrix_loc = np.linalg.cholesky(correlation_matrix)
+cholesky_matrix_uncertainty = np.full((N_parties, N_parties), 0.1)
+
 # cholesky_matrix = np.linalg.cholesky(correlation_matrix)
 df = df.sort_values("N_Days")
 
@@ -179,7 +158,8 @@ data = dict(
     incumbent=incumbent,
     inflator=np.sqrt(2),
     correlation_matrix=correlation_matrix,
-    cholesky_matrix=np.linalg.cholesky(correlation_matrix),
+    cholesky_matrix_loc=cholesky_matrix_loc,
+    cholesky_matrix_scale=cholesky_matrix_uncertainty,
 )
 
 model = cmdstanpy.CmdStanModel(stan_file="src/scripts/stan/MultiNormal.stan")
@@ -192,11 +172,14 @@ coords = {
     "pollster": df["PollName"].cat.categories[1:],
     "time": np.arange(data["prediction_date"]),
     "party": party_columns,
+    "party_x": party_columns,
+    "party_y": party_columns,
 }
 dims = {
     "mu": ["time", "party"],
     "house_effects": ["pollster", "party"],
     "sigma": ["party"],
+    "cor_L": ["party_x", "party_y"],
     "time_variation_sigma": ["time"],
 }
 trace = az.from_cmdstanpy(
