@@ -3,58 +3,142 @@ import matplotlib.pyplot as plt
 import datetime
 import matplotlib.dates as mdates
 import arviz as az
-from pathlib import Path
+import pandas as pd
+
+import src.scripts.file_paths as fp
 
 
-def get_filenames(date, first_pref_or_2pp):
+def get_pollster_markers():
 
-    assert first_pref_or_2pp in [
-        "first_preference",
-        "2pp",
-    ], "Must be one of first_preference or 2pp"
+    marker_dict = {
+        "Essential_Research": "o",
+        "Freshwater_Strategy": "s",
+        "Newspoll_Pyxis": "D",
+        "Newspoll_YouGov": "^",
+        "RedBridge_Group": "v",
+        "Resolve_Strategic": "P",
+        "Roy_Morgan": "X",
+        "Wolf_&_Smith": "*",
+        "YouGov": "H",
+    }
+    return marker_dict
 
-    # Main folder for inference data
-    master_folder_inference = Path(f"src/data/InferenceData/{date}/")
-    master_folder_inference.mkdir(exist_ok=True)
 
-    # Main folder for model data
-    master_folder_Model = Path(f"src/data/ModelData/{date}/")
-    master_folder_Model.mkdir(exist_ok=True)
+def get_correlation_matrix(unique_parameters):
 
-    netcdf_filename = master_folder_inference / f"{first_pref_or_2pp}_{date}"
-    model_data_filename = master_folder_Model / f"{first_pref_or_2pp}_{date}.pkl"
-    model_df_filename = master_folder_Model / f"{first_pref_or_2pp}_{date}.csv"
-    election_data_filename = master_folder_Model / "election_data.csv"
+    vote_shares = pd.read_csv(
+        fp.three_party_voteshare_data, index_col="UniqueIdentifier"
+    ).drop(["PartyAb", "StateAb", "DivisionNm"], axis=1)
+    vote_shares = vote_shares.loc[unique_parameters]
 
-    return (
-        netcdf_filename,
-        model_data_filename,
-        model_df_filename,
-        election_data_filename,
+    correlation_matrix = vote_shares.T.corr()
+
+    return correlation_matrix
+
+
+# Make the data frames
+def make_data_for_fitting(df, party_columns, states, prediction_date):
+
+    unique_parameters = [f"{p}_{s}" for p in party_columns for s in states]
+    election_date = df.StartDate.iloc[0]
+
+    # Encode the parties
+    N_parties = len(unique_parameters)
+
+    # Now go from wide to long and make the 'part index' column
+    df = df.melt(
+        value_vars=party_columns,
+        id_vars=[
+            "StartDate",
+            "EndDate",
+            "PollName",
+            "Mode",
+            "Scope",
+            "Sample",
+        ],
+        var_name="Party",
+        value_name="PollResult",
     )
 
+    # Drop the states and parties we don't care about
+    df = df.loc[df.Party.isin(party_columns)]
+    df = df.loc[df.Scope.isin(states)]
 
-def get_filenames_single_party(party_short_name, date):
+    # Have a unique index for each party in each state
+    df["Party_Scope"] = df["Party"] + "_" + df["Scope"]
+    df["Party_Scope"] = pd.Categorical(df.Party_Scope, categories=unique_parameters)
+    df["PartyIndex"] = df["Party_Scope"].cat.codes + 1
 
-    # Main folder for inference data
-    master_folder_inference = Path(f"src/data/InferenceData/{date}/")
-    master_folder_inference.mkdir(exist_ok=True)
+    # Strip off the election values
+    election_data = df.loc[df.PollName == "Election"]
+    df = df.drop(election_data.index)
 
-    # Main folder for model data
-    master_folder_Model = Path(f"src/data/ModelData/{date}/")
-    master_folder_Model.mkdir(exist_ok=True)
+    ## Time based manipulations
+    # Take the poll as occuring at the end of the range
+    # Can do a better job here...
+    df["PollDate"] = df.EndDate
 
-    netcdf_filename = master_folder_inference / f"{party_short_name}_{date}"
-    model_data_filename = master_folder_Model / f"{party_short_name}_{date}.pkl"
-    model_df_filename = master_folder_Model / f"{party_short_name}_{date}.csv"
-    election_data_filename = master_folder_Model / "election_data.csv"
+    # Date we want to have our predictions on
+    prediction_date_integer = (prediction_date - election_date).days
 
-    return (
-        netcdf_filename,
-        model_data_filename,
-        model_df_filename,
-        election_data_filename,
+    # Add a different marker style for each pollster
+    df["MarkerShape"] = df.PollName.map(get_pollster_markers())
+
+    # Find the time since the election for each poll
+    df["N_Days"] = (df.PollDate - election_date).dt.days.astype(int)
+
+    # Encode the pollster
+    df["PollName"] = pd.Categorical(df["PollName"])
+    df["PollName_Encoded"] = df["PollName"].cat.codes + 1
+    N_pollsters = len(df.PollName_Encoded.unique())
+
+    # Make the errors for each poll
+    # Coerce to integers
+    df["Sample"] = df["Sample"].astype(int)
+    # Make the variance
+    r = df["PollResult"].values / 100
+    df["PollVariance"] = r * (1 - r) / df["Sample"].values
+
+    # And the Cholesky decomposition of the covariance matrix
+
+    # Get the appropriate correlation matrix
+    # Remove the LNP in Queensland
+    # correlation_matrix = np.array(
+    #     [
+    #         [1.0, 0.67420595, -0.50838762],
+    #         [0.67420595, 1.0, -0.89800079],
+    #         [-0.50838762, -0.89800079, 1.0],
+    #     ]
+    # )
+    correlation_matrix = get_correlation_matrix(unique_parameters).values
+    cholesky_matrix_loc = np.linalg.cholesky(correlation_matrix)
+    cholesky_matrix_uncertainty = np.full((N_parties, N_parties), 0.1)
+
+    # cholesky_matrix = np.linalg.cholesky(correlation_matrix)
+    df = df.sort_values("N_Days")
+
+    # Now lay out all of the data
+    data = dict(
+        N_polls=len(df),
+        N_pollsters=N_pollsters,
+        N_parties=N_parties,
+        N_days=df["N_Days"],
+        party_index=df["PartyIndex"],
+        PollName_Encoded=df["PollName_Encoded"],
+        prediction_date=prediction_date_integer,
+        poll_variance=df["PollVariance"],
+        survey_size=df["Sample"],
+        poll_result=df["PollResult"] / 100,
+        election_result=election_data.PollResult.values / 100,
+        election_result_index=election_data.PartyIndex.values,
+        additional_variance=0.001,
+        inflator=np.sqrt(2),
+        correlation_matrix=correlation_matrix,
+        cholesky_matrix_loc=cholesky_matrix_loc,
+        cholesky_matrix_scale=cholesky_matrix_uncertainty,
     )
+
+    return data, df, election_data, unique_parameters
 
 
 # Plotting

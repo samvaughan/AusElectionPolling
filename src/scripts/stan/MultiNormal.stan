@@ -82,7 +82,8 @@ data{
     matrix[N_parties, N_parties] cholesky_matrix_scale;
 
     // Result of the election in 2022
-    row_vector[N_parties] election_result_2022;
+    array[N_parties] real election_result;
+    array[N_parties] int election_result_index;
 
     // // Incumbant flag
     // row_vector[N_parties] incumbent;
@@ -119,8 +120,9 @@ transformed parameters {
     Delta[t] = mu_raw[t] * Sigma;
   }
 
-  mu[1] = election_result_2022;
+  
   for (p in 1:N_parties){
+    mu[1, p] = election_result[election_result_index[p]];
     mu[2:,p] = cumulative_sum(Delta[:,p]) + election_result_2022[p];
   }
 
@@ -143,7 +145,10 @@ model{
     }
 
     //Election measurement
-    election_result_2022 ~ normal(mu[1], 0.001);
+    for (p in 1:N_parties){
+      election_result[election_result_index[p]] ~ normal(mu[1, p], 0.001);
+    }
+
     // Poll measurement
     for (i in 1:N_polls){
       poll_result[i] ~ normal(mu[N_days[i], party_index[i]] + house_effects[PollName_Encoded[i], party_index[i]], inflator * sqrt(poll_variance[i]));

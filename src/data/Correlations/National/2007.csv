@@ -1,0 +1,23 @@
+2007 Federal Election House of Representatives First Preferences By Party [Event:13745 Phase:FinalResults Generated:2008-09-03T12:42:05 Cycle:349e38e7-5eda-4bc7-a4a0-805bff59620f Created:2008-08-13T17:22:12 Environment:TEST Site:Primary Server:TST-VTR04 Version:4.8.0.0]
+PartyAb,PartyNm,OrderOfAppearance,Contested,Nominations,Elected,OrdinaryVotes,OrdinaryPercentage,AbsentVotes,AbsentPercentage,ProvisionalVotes,ProvisionalPercentage,PrePollVotes,PrePollPercentage,PostalVotes,PostalPercentage,TotalVotes,TotalPercentage,TotalSwing
+LP,Liberal,1,132,132,55,3579857,35.96,253387,35.4,6738,29.68,376227,36.35,290093,41.91,4506302,36.28,-4.19
+ALP,Australian Labor Party,2,150,150,83,4383431,44.04,287743,40.2,11171,49.21,431563,41.7,274276,39.62,5388184,43.38,5.74
+GRN,The Greens,3,150,150,0,760756,7.64,82116,11.47,2243,9.88,84534,8.17,38140,5.51,967789,7.79,0.6
+NP,The Nationals,4,24,24,10,538515,5.41,30037,4.2,648,2.85,65443,6.32,47781,6.9,682424,5.49,-0.4
+FFP,Family First,5,129,129,0,197263,1.98,19176,2.68,624,2.75,19165,1.85,10570,1.53,246798,1.99,-0.02
+DEM,Democrats,6,86,86,0,68051,0.68,7551,1.05,181,0.8,8383,0.81,5647,0.82,89813,0.72,-0.52
+ON,One Nation,7,35,35,0,25129,0.25,3057,0.43,84,0.37,2457,0.24,1923,0.28,32650,0.26,-0.93
+CDP,CDP Christian Party,8,63,63,0,84886,0.85,7735,1.08,229,1.01,7343,0.71,4512,0.65,104705,0.84,0.22
+CEC,Citizens Electoral Council,9,81,81,0,21081,0.21,2803,0.39,111,0.49,2709,0.26,1176,0.17,27880,0.22,-0.14
+CLP,CLP - The Territory Party,10,2,2,0,30924,0.31,688,0.1,53,0.23,6651,0.64,1982,0.29,40298,0.32,-0.02
+SAL,Socialist Alliance,11,17,17,0,7993,0.08,919,0.13,36,0.16,763,0.07,262,0.04,9973,0.08,-0.04
+FPY,The Fishing Party,12,2,2,0,1566,0.02,217,0.03,3,0.01,183,0.02,114,0.02,2083,0.02,0
+DLP,DLP - Democratic Labor Party,13,4,4,0,4350,0.04,569,0.08,39,0.17,850,0.08,210,0.03,6018,0.05,0.04
+CCC,Climate Change Coalition,14,7,7,0,7364,0.07,769,0.11,20,0.09,896,0.09,421,0.06,9470,0.08,0.08
+CCE,Conservatives for Climate and Environment Incorporated,15,4,4,0,2418,0.02,235,0.03,6,0.03,376,0.04,204,0.03,3239,0.03,0.03
+LDP,Liberty and Democracy Party,16,47,47,0,12360,0.12,2357,0.33,62,0.27,1573,0.15,696,0.1,17048,0.14,0.14
+NCP,Non-Custodial Parents Party,17,2,2,0,617,0.01,53,0.01,0,0,94,0.01,31,0,795,0.01,0
+SEP,Socialist Equality Party,18,9,9,0,3326,0.03,460,0.06,19,0.08,346,0.03,132,0.02,4283,0.03,0.03
+WWW,What Women Want (Australia),19,4,4,0,2881,0.03,402,0.06,16,0.07,411,0.04,160,0.02,3870,0.03,0.03
+IND,Independent,20,71,102,2,220630,2.22,15427,2.16,413,1.82,24835,2.4,13831,2,275136,2.22,-0.24
+NAFD,Non Affiliated,21,4,4,0,885,0.01,155,0.02,4,0.02,131,0.01,59,0.01,1234,0.01,-0.02
