@@ -91,6 +91,9 @@ mask = np.isfinite(df["LNP_2pp"].values.astype(float))
 df["LNP_2pp"] = np.where(
     mask, df["LNP_2pp"].values.astype(float), df["L-NP r/a"].values.astype(float)
 )
+# Now adjust for undecideds:
+df["ALP_2pp"] = 100 * (df["ALP_2pp"] / (df["ALP_2pp"] + df["LNP_2pp"]))
+df["LNP_2pp"] = 100 * (df["LNP_2pp"] / (df["ALP_2pp"] + df["LNP_2pp"]))
 
 # Have to treat the 'Sample' column differently, since it has commas in the numbers
 df["Sample"] = df["Sample"].str.replace(",", "").apply(pd.to_numeric, errors="coerce")

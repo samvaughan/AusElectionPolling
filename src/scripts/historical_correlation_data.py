@@ -1,5 +1,4 @@
 import pandas as pd
-from pathlib import Path
 import src.scripts.file_paths as fp
 
 idx = pd.IndexSlice
@@ -133,3 +132,60 @@ national_state_correlations.to_csv(
     fp.three_party_voteshare_data,
     index=False,
 )
+
+wills = master.loc[idx[["ALP", "LP", "GRN"], :, "Wills"]].reset_index()
+wills["UniqueIdentifier"] = wills["PartyAb"] + "_Wills"
+
+seat_results = (
+    pd.concat((wills, national_state_correlations))
+    .set_index("UniqueIdentifier")
+    .drop(["PartyAb", "StateAb", "DivisionNm"], axis=1)
+)
+to_drop = seat_results.filter(regex="ACT|NT|WA|TAS|QLD|NSW|SA", axis=0).index
+seat_results = seat_results.drop(to_drop, axis=0)
+
+corr = seat_results.T.corr()
+
+# scale = 1e-3
+# N = 3
+
+# fitted_Sigma = trace.posterior.Sigma.mean(("chain", "draw")).values
+
+# sigma = trace.posterior.sigma.mean(("chain", "draw"))
+# new_s = np.concatenate(([scale] * N, sigma.values))
+
+# BigSig = np.diag(new_s) @ corr.values @ np.diag(new_s) + np.eye(len(new_s)) * 1e-15
+
+# S11 = BigSig[:N, :N]
+# S22 = BigSig[N:, N:]
+# S12 = BigSig[N:, :N]
+# S21 = S12.T
+
+# S12_Inv_S22 = S21 @ np.linalg.inv(S22)
+# S12_Inv_S22_S21 = S21 @ np.linalg.solve(S22, S12)
+
+# mu1 = np.array([0.389, 0.173, 0.283])
+
+# MU = az.extract(trace.posterior.mu, combined=True)["mu"]
+# mus = np.zeros((3, 921))
+# mus[:, 0] = mu1
+# for t in np.arange(1, 921):
+#     mu2 = MU.sel(time=t - 1).mean("sample")
+#     a = MU.sel(time=t).mean("sample")
+
+#     mubar = mus[:, t - 1] + S12_Inv_S22 @ (a - mu2).values
+#     mus[:, t] = mubar
+#     Sbar = S11 - S12_Inv_S22_S21
+
+
+# mu = trace.posterior.mu
+# mean = mu.sel(time=899).stack(sample=("chain", "draw")).mean("sample")
+# test = mu.sel(time=900).stack(sample=("chain", "draw"))
+# ll = np.cov(test)
+
+# ## These give the same histogram...
+# values = mu.sel(time=900).stack(sample=("chain", "draw"))
+# samples = rng.multivariate_normal(mean, ll, size=4000)
+
+# plt.hist(values.sel(party="ALP_NSW"), bins="fd")
+# plt.hist(samples[:, 2], bins="fd")

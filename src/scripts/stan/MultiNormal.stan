@@ -116,15 +116,17 @@ transformed parameters {
 
   Sigma = diag_pre_multiply(sigma, cor_L);
 
-  for (t in 1:prediction_date - 1){
-    Delta[t] = mu_raw[t] * Sigma;
+
+  for (p in 1:N_parties){
+    mu[1, election_result_index[p]] = election_result[election_result_index[p]];
+    //mu[2:,election_result_index[p]] = cumulative_sum(Delta[:,election_result_index[p]]) + election_result[election_result_index[p]];
   }
 
-  
-  for (p in 1:N_parties){
-    mu[1, p] = election_result[election_result_index[p]];
-    mu[2:,p] = cumulative_sum(Delta[:,p]) + election_result_2022[p];
+  for (t in 1:prediction_date - 1){
+    // Delta[t] = mu_raw[t] * Sigma;
+    mu[t+1] = mu[t] + mu_raw[t] * Sigma;
   }
+
 
 }
 
@@ -146,7 +148,7 @@ model{
 
     //Election measurement
     for (p in 1:N_parties){
-      election_result[election_result_index[p]] ~ normal(mu[1, p], 0.001);
+      election_result[election_result_index[p]] ~ normal(mu[1, election_result_index[p]], 0.001);
     }
 
     // Poll measurement
@@ -155,4 +157,16 @@ model{
     }
 
 
+}
+
+generated quantities {
+    matrix[prediction_date, N_parties] nu;
+
+    for (p in 1:N_parties){
+        nu[1, election_result_index[p]] = election_result[election_result_index[p]];
+    }
+
+    for (t in 2:prediction_date){
+          nu[t,:] = to_row_vector(multi_normal_cholesky_rng(mu[t-1, :], Sigma));
+      }
 }

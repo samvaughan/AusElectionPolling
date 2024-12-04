@@ -1,0 +1,126 @@
+
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+        <link type="text/css" rel="stylesheet" href="TASK3.css" media="all" />
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
+
+    <body>
+
+        <div id="container" style="min-width: 310px; max-width: 1200px; height: 300px; margin: 0 auto">
+
+        <script type="text/javascript">
+        Highcharts.setOptions({
+  credits: {
+  enabled: true,
+  style: {
+  color: '#cccccc',
+  fontSize: '10px'
+},
+  text: 'Sam Vaughan (2024)'
+}
+});
+
+        document.addEventListener('DOMContentLoaded', function() {
+Highcharts.chart('container',
+{
+  chart: {
+  inverted: true,
+  type: 'boxplot',
+  zooming: {
+  type: 'xy'
+}
+},
+  legend: {
+  enabled: false
+},
+  plotOptions: {
+  boxplot: {
+  medianColor: '#FFFFFF',
+  medianWidth: 5,
+  stemWidth: 5,
+  whiskerLength: '30%',
+  whiskerWidth: 5,
+  lineWidth: 3,
+  type: 'boxplot'
+}
+},
+  series: [{
+  data: [{
+  high: 32.3,
+  low: 28.5,
+  median: 30.4,
+  q1: 29.4,
+  q3: 31.4,
+  x: 0,
+  color: '#e53440',
+  fillColor: '#e53440',
+name: 'ALP'
+}],
+  type: 'boxplot'
+},
+{
+  data: [{
+  high: 39.5,
+  low: 36.5,
+  median: 37.9,
+  q1: 37.2,
+  q3: 38.7,
+  x: 1,
+  color: '#1c4f9c',
+  fillColor: '#1c4f9c',
+name: 'LNP'
+}],
+  type: 'boxplot'
+},
+{
+  data: [{
+  high: 13.9,
+  low: 12.2,
+  median: 13.0,
+  q1: 12.7,
+  q3: 13.5,
+  x: 2,
+  color: '#008943',
+  fillColor: '#008943',
+name: 'GRN'
+}],
+  type: 'boxplot'
+}],
+  subtitle: {
+  align: 'left',
+  text: 'Source: Poll data aggregated from <a href="https://www.pollbludger.net/fed2025/bludgertrack/polldata.htm?">PollBludger.net</a>, media reports and other sources'
+},
+  title: {
+  align: 'left',
+  text: 'First Preference Voting Intention for an election held tomorrow'
+},
+  tooltip: {
+  headerFormat: '{point.key}<br/>',
+  pointFormat: 'Median: {point.median}%<br/>95% confidence interval is<br/>{point.q1}% to {point.q3}%'
+},
+  xAxis: {
+  categories: ['ALP',
+'LNP',
+'GRN']
+},
+  yAxis: {
+  title: {
+  text: 'Vote (%)'
+}
+}
+},
+);
+});
+
+        </script>
+        </div>
+    </body>
+
+    </html>
+    

@@ -1,0 +1,4951 @@
+
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+        <link type="text/css" rel="stylesheet" href="TASK3.css" media="all" />
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
+
+    <body>
+
+        <div id="container" style="min-width: 310px; max-width: 1200px; height: 600px; margin: 0 auto">
+
+        <script type="text/javascript">
+
+        Highcharts.setOptions({
+  credits: {
+  enabled: true,
+  style: {
+  color: '#cccccc',
+  fontSize: '10px'
+},
+  text: 'Sam Vaughan (2024)'
+}
+});
+        Highcharts.SVGRenderer.prototype.symbols.cross = function (x, y, w, h) {
+                return ['M', x, y, 'L', x + w, y + h, 'M', x + w, y, 'L', x, y + h, 'z'];
+            };
+            if (Highcharts.VMLRenderer) {
+                Highcharts.VMLRenderer.prototype.symbols.cross = Highcharts.SVGRenderer.prototype.symbols.cross;
+            }
+        Highcharts.SVGRenderer.prototype.symbols.plus = function (x, y, w, h) {
+                return ['M', x, y + h/2, 'L', x + w, y+h/2, 'M', x + w/2, y, 'L', x+w/2, y + h, 'z'];
+            };
+            if (Highcharts.VMLRenderer) {
+                Highcharts.VMLRenderer.prototype.symbols.cross = Highcharts.SVGRenderer.prototype.symbols.cross;
+            }
+
+        document.addEventListener('DOMContentLoaded', function() {
+Highcharts.chart('container',
+{
+  accessibility: {
+  point: {
+  valueDescriptionFormat: '{point.name}, Date: {point.x} Poll Result: {point.y}'
+}
+},
+  chart: {
+  panKey: 'shift',
+  panning: {
+  enabled: true
+},
+  plotBorderWidth: 1,
+  type: 'scatter',
+  zooming: {
+  type: 'xy'
+}
+},
+  legend: {
+  enabled: false
+},
+  plotOptions: {
+  line: {
+  lineWidth: 10,
+  shadow: {
+  opacity: 0.8,
+  width: 6
+},
+  states: {
+  hover: {
+  enabled: false
+},
+  inactive: {
+  enabled: false
+}
+},
+  tooltip: {
+  pointFormat: '{series.name} support: <b>{point.y}%'
+},
+  type: 'line'
+},
+  scatter: {
+  jitter: {
+  x: 0.5
+},
+  marker: {
+  radius: 8,
+  states: {
+  hover: {
+  enabled: true
+},
+  inactive: {
+  enabled: true,
+  opacity: 0.25
+}
+}
+},
+  states: {
+  inactive: {
+  enabled: true
+}
+},
+  tooltip: {
+  pointFormatter: function() {
+
+            return Highcharts.dateFormat('%A, %e %B %Y', this.x) + '<br/>Poll Result: ' + this.y + '%<br/>' + 'Organisation:' + this.id
+                }
+},
+  type: 'scatter'
+}
+},
+  series: [{
+  data: [{
+  x: 1655596800000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1660435200000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1661040000000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1661644800000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1662249600000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1662854400000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1663459200000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1664064000000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1664668800000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1665273600000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1665878400000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1666483200000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1667088000000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1667692800000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1668297600000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1668902400000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1669507200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1670112000000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1670716800000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1671148800000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1673136000000.0,
+  y: 39.5,
+  id: 'Roy Morgan'
+},{
+  x: 1673740800000.0,
+  y: 39.5,
+  id: 'Roy Morgan'
+},{
+  x: 1674345600000.0,
+  y: 39.0,
+  id: 'Roy Morgan'
+},{
+  x: 1674950400000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1675555200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1676160000000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1676764800000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1677369600000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1677974400000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1678579200000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1679184000000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1679788800000.0,
+  y: 35.5,
+  id: 'Roy Morgan'
+},{
+  x: 1680393600000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1680998400000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1681603200000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1682208000000.0,
+  y: 35.5,
+  id: 'Roy Morgan'
+},{
+  x: 1682812800000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1683417600000.0,
+  y: 35.5,
+  id: 'Roy Morgan'
+},{
+  x: 1684022400000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1684627200000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1685232000000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1685836800000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1686441600000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1687046400000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1687651200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1688256000000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1688860800000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1689465600000.0,
+  y: 35.5,
+  id: 'Roy Morgan'
+},{
+  x: 1690070400000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1690675200000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1691280000000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1691884800000.0,
+  y: 35.5,
+  id: 'Roy Morgan'
+},{
+  x: 1692489600000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1693094400000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1693699200000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1694304000000.0,
+  y: 32.5,
+  id: 'Roy Morgan'
+},{
+  x: 1694908800000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1695513600000.0,
+  y: 32.5,
+  id: 'Roy Morgan'
+},{
+  x: 1696118400000.0,
+  y: 32.5,
+  id: 'Roy Morgan'
+},{
+  x: 1696723200000.0,
+  y: 33.0,
+  id: 'Roy Morgan'
+},{
+  x: 1697328000000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1697932800000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1698537600000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1699142400000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1699747200000.0,
+  y: 30.0,
+  id: 'Roy Morgan'
+},{
+  x: 1700352000000.0,
+  y: 29.5,
+  id: 'Roy Morgan'
+},{
+  x: 1700956800000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1701561600000.0,
+  y: 32.5,
+  id: 'Roy Morgan'
+},{
+  x: 1702166400000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1702771200000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1704585600000.0,
+  y: 29.0,
+  id: 'Roy Morgan'
+},{
+  x: 1705190400000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1705795200000.0,
+  y: 32.5,
+  id: 'Roy Morgan'
+},{
+  x: 1706400000000.0,
+  y: 31.0,
+  id: 'Roy Morgan'
+},{
+  x: 1707004800000.0,
+  y: 33.0,
+  id: 'Roy Morgan'
+},{
+  x: 1708905600000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1709510400000.0,
+  y: 34.0,
+  id: 'Roy Morgan'
+},{
+  x: 1710115200000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1710720000000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1711324800000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1711843200000.0,
+  y: 30.0,
+  id: 'Roy Morgan'
+},{
+  x: 1712448000000.0,
+  y: 29.5,
+  id: 'Roy Morgan'
+},{
+  x: 1713052800000.0,
+  y: 30.0,
+  id: 'Roy Morgan'
+},{
+  x: 1713657600000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1714262400000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1714867200000.0,
+  y: 30.0,
+  id: 'Roy Morgan'
+},{
+  x: 1715472000000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1716076800000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1716681600000.0,
+  y: 28.5,
+  id: 'Roy Morgan'
+},{
+  x: 1717286400000.0,
+  y: 31.0,
+  id: 'Roy Morgan'
+},{
+  x: 1717891200000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1718496000000.0,
+  y: 29.5,
+  id: 'Roy Morgan'
+},{
+  x: 1719100800000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1719705600000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1720310400000.0,
+  y: 28.5,
+  id: 'Roy Morgan'
+},{
+  x: 1720915200000.0,
+  y: 31.0,
+  id: 'Roy Morgan'
+},{
+  x: 1721520000000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1722124800000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1722729600000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1723334400000.0,
+  y: 29.5,
+  id: 'Roy Morgan'
+},{
+  x: 1723939200000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1724544000000.0,
+  y: 29.5,
+  id: 'Roy Morgan'
+},{
+  x: 1725148800000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1725753600000.0,
+  y: 30.0,
+  id: 'Roy Morgan'
+},{
+  x: 1726358400000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1726963200000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1727568000000.0,
+  y: 30.0,
+  id: 'Roy Morgan'
+},{
+  x: 1728172800000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1728777600000.0,
+  y: 30.0,
+  id: 'Roy Morgan'
+},{
+  x: 1729382400000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1729987200000.0,
+  y: 30.0,
+  id: 'Roy Morgan'
+},{
+  x: 1730592000000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1731196800000.0,
+  y: 30.5,
+  id: 'Roy Morgan'
+},{
+  x: 1731801600000.0,
+  y: 29.0,
+  id: 'Roy Morgan'
+}],
+  name: 'ALP',
+  color: '#e53440',
+  marker: {
+  radius: 7,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1655596800000.0,
+  y: 11.0,
+  id: 'Roy Morgan'
+},{
+  x: 1660435200000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1661040000000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1661644800000.0,
+  y: 10.5,
+  id: 'Roy Morgan'
+},{
+  x: 1662249600000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1662854400000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1663459200000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1664064000000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1664668800000.0,
+  y: 11.0,
+  id: 'Roy Morgan'
+},{
+  x: 1665273600000.0,
+  y: 10.5,
+  id: 'Roy Morgan'
+},{
+  x: 1665878400000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1666483200000.0,
+  y: 11.0,
+  id: 'Roy Morgan'
+},{
+  x: 1667088000000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1667692800000.0,
+  y: 11.0,
+  id: 'Roy Morgan'
+},{
+  x: 1668297600000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1668902400000.0,
+  y: 11.0,
+  id: 'Roy Morgan'
+},{
+  x: 1669507200000.0,
+  y: 11.0,
+  id: 'Roy Morgan'
+},{
+  x: 1670112000000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1670716800000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1671148800000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1673136000000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1673740800000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1674345600000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1674950400000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1675555200000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1676160000000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1676764800000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1677369600000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1677974400000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1678579200000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1679184000000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1679788800000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1680393600000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1680998400000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1681603200000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1682208000000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1682812800000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1683417600000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1684022400000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1684627200000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1685232000000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1685836800000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1686441600000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1687046400000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1687651200000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1688256000000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1688860800000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1689465600000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1690070400000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1690675200000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1691280000000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1691884800000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1692489600000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1693094400000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1693699200000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1694304000000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1694908800000.0,
+  y: 15.5,
+  id: 'Roy Morgan'
+},{
+  x: 1695513600000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1696118400000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1696723200000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1697328000000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1697932800000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1698537600000.0,
+  y: 15.0,
+  id: 'Roy Morgan'
+},{
+  x: 1699142400000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1699747200000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1700352000000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1700956800000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1701561600000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1702166400000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1702771200000.0,
+  y: 11.5,
+  id: 'Roy Morgan'
+},{
+  x: 1704585600000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1705190400000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1705795200000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1706400000000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1707004800000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1708905600000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1709510400000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1710115200000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1710720000000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1711324800000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1711843200000.0,
+  y: 15.5,
+  id: 'Roy Morgan'
+},{
+  x: 1712448000000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1713052800000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1713657600000.0,
+  y: 16.0,
+  id: 'Roy Morgan'
+},{
+  x: 1714262400000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1714867200000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1715472000000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1716076800000.0,
+  y: 14.5,
+  id: 'Roy Morgan'
+},{
+  x: 1716681600000.0,
+  y: 15.0,
+  id: 'Roy Morgan'
+},{
+  x: 1717286400000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1717891200000.0,
+  y: 15.5,
+  id: 'Roy Morgan'
+},{
+  x: 1718496000000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1719100800000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1719705600000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1720310400000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1720915200000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1721520000000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1722124800000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1722729600000.0,
+  y: 12.0,
+  id: 'Roy Morgan'
+},{
+  x: 1723334400000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1723939200000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1724544000000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1725148800000.0,
+  y: 13.0,
+  id: 'Roy Morgan'
+},{
+  x: 1725753600000.0,
+  y: 14.5,
+  id: 'Roy Morgan'
+},{
+  x: 1726358400000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1726963200000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1727568000000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1728172800000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1728777600000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1729382400000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+},{
+  x: 1729987200000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1730592000000.0,
+  y: 14.0,
+  id: 'Roy Morgan'
+},{
+  x: 1731196800000.0,
+  y: 12.5,
+  id: 'Roy Morgan'
+},{
+  x: 1731801600000.0,
+  y: 13.5,
+  id: 'Roy Morgan'
+}],
+  name: 'Greens',
+  color: '#008943',
+  marker: {
+  radius: 7,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1655596800000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1660435200000.0,
+  y: 39.0,
+  id: 'Roy Morgan'
+},{
+  x: 1661040000000.0,
+  y: 38.5,
+  id: 'Roy Morgan'
+},{
+  x: 1661644800000.0,
+  y: 40.0,
+  id: 'Roy Morgan'
+},{
+  x: 1662249600000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1662854400000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1663459200000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1664064000000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1664668800000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1665273600000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1665878400000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1666483200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1667088000000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1667692800000.0,
+  y: 39.0,
+  id: 'Roy Morgan'
+},{
+  x: 1668297600000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1668902400000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1669507200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1670112000000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1670716800000.0,
+  y: 33.0,
+  id: 'Roy Morgan'
+},{
+  x: 1671148800000.0,
+  y: 32.5,
+  id: 'Roy Morgan'
+},{
+  x: 1673136000000.0,
+  y: 31.0,
+  id: 'Roy Morgan'
+},{
+  x: 1673740800000.0,
+  y: 31.5,
+  id: 'Roy Morgan'
+},{
+  x: 1674345600000.0,
+  y: 32.5,
+  id: 'Roy Morgan'
+},{
+  x: 1674950400000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1675555200000.0,
+  y: 33.0,
+  id: 'Roy Morgan'
+},{
+  x: 1676160000000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1676764800000.0,
+  y: 33.0,
+  id: 'Roy Morgan'
+},{
+  x: 1677369600000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1677974400000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1678579200000.0,
+  y: 34.0,
+  id: 'Roy Morgan'
+},{
+  x: 1679184000000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1679788800000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1680393600000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1680998400000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1681603200000.0,
+  y: 33.0,
+  id: 'Roy Morgan'
+},{
+  x: 1682208000000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1682812800000.0,
+  y: 35.5,
+  id: 'Roy Morgan'
+},{
+  x: 1683417600000.0,
+  y: 35.5,
+  id: 'Roy Morgan'
+},{
+  x: 1684022400000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1684627200000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1685232000000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1685836800000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1686441600000.0,
+  y: 33.0,
+  id: 'Roy Morgan'
+},{
+  x: 1687046400000.0,
+  y: 34.0,
+  id: 'Roy Morgan'
+},{
+  x: 1687651200000.0,
+  y: 32.0,
+  id: 'Roy Morgan'
+},{
+  x: 1688256000000.0,
+  y: 33.5,
+  id: 'Roy Morgan'
+},{
+  x: 1688860800000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1689465600000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1690070400000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1690675200000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1691280000000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1691884800000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1692489600000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1693094400000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1693699200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1694304000000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1694908800000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1695513600000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1696118400000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1696723200000.0,
+  y: 34.0,
+  id: 'Roy Morgan'
+},{
+  x: 1697328000000.0,
+  y: 34.5,
+  id: 'Roy Morgan'
+},{
+  x: 1697932800000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1698537600000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1699142400000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1699747200000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1700352000000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1700956800000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1701561600000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1702166400000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1702771200000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1704585600000.0,
+  y: 39.0,
+  id: 'Roy Morgan'
+},{
+  x: 1705190400000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1705795200000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1706400000000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1707004800000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1708905600000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1709510400000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1710115200000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1710720000000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1711324800000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1711843200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1712448000000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1713052800000.0,
+  y: 38.5,
+  id: 'Roy Morgan'
+},{
+  x: 1713657600000.0,
+  y: 35.5,
+  id: 'Roy Morgan'
+},{
+  x: 1714262400000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1714867200000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1715472000000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1716076800000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1716681600000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1717286400000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1717891200000.0,
+  y: 35.0,
+  id: 'Roy Morgan'
+},{
+  x: 1718496000000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1719100800000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1719705600000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1720310400000.0,
+  y: 39.5,
+  id: 'Roy Morgan'
+},{
+  x: 1720915200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1721520000000.0,
+  y: 39.5,
+  id: 'Roy Morgan'
+},{
+  x: 1722124800000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1722729600000.0,
+  y: 37.0,
+  id: 'Roy Morgan'
+},{
+  x: 1723334400000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1723939200000.0,
+  y: 38.5,
+  id: 'Roy Morgan'
+},{
+  x: 1724544000000.0,
+  y: 39.5,
+  id: 'Roy Morgan'
+},{
+  x: 1725148800000.0,
+  y: 36.0,
+  id: 'Roy Morgan'
+},{
+  x: 1725753600000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1726358400000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1726963200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1727568000000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1728172800000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1728777600000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1729382400000.0,
+  y: 36.5,
+  id: 'Roy Morgan'
+},{
+  x: 1729987200000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1730592000000.0,
+  y: 38.0,
+  id: 'Roy Morgan'
+},{
+  x: 1731196800000.0,
+  y: 37.5,
+  id: 'Roy Morgan'
+},{
+  x: 1731801600000.0,
+  y: 39.0,
+  id: 'Roy Morgan'
+}],
+  name: 'L/NP',
+  color: '#1c4f9c',
+  marker: {
+  radius: 7,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1659139200000.0,
+  y: 37.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1662163200000.0,
+  y: 37.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1667088000000.0,
+  y: 38.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1670025600000.0,
+  y: 39.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1675468800000.0,
+  y: 38.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1677888000000.0,
+  y: 37.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1680393600000.0,
+  y: 38.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1682208000000.0,
+  y: 38.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1684022400000.0,
+  y: 38.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1685750400000.0,
+  y: 38.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1687564800000.0,
+  y: 38.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1689379200000.0,
+  y: 36.0,
+  id: 'Newspoll YouGov'
+}],
+  name: 'ALP',
+  color: '#e53440',
+  marker: {
+  radius: 5,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1659139200000.0,
+  y: 12.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1662163200000.0,
+  y: 13.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1667088000000.0,
+  y: 11.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1670025600000.0,
+  y: 11.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1675468800000.0,
+  y: 11.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1677888000000.0,
+  y: 10.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1680393600000.0,
+  y: 10.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1682208000000.0,
+  y: 11.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1684022400000.0,
+  y: 11.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1685750400000.0,
+  y: 12.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1687564800000.0,
+  y: 11.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1689379200000.0,
+  y: 12.0,
+  id: 'Newspoll YouGov'
+}],
+  name: 'Greens',
+  color: '#008943',
+  marker: {
+  radius: 5,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1659139200000.0,
+  y: 33.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1662163200000.0,
+  y: 31.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1667088000000.0,
+  y: 35.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1670025600000.0,
+  y: 35.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1675468800000.0,
+  y: 34.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1677888000000.0,
+  y: 35.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1680393600000.0,
+  y: 33.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1682208000000.0,
+  y: 33.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1684022400000.0,
+  y: 34.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1685750400000.0,
+  y: 34.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1687564800000.0,
+  y: 35.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1689379200000.0,
+  y: 34.0,
+  id: 'Newspoll YouGov'
+}],
+  name: 'L/NP',
+  color: '#1c4f9c',
+  marker: {
+  radius: 5,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1661040000000.0,
+  y: 42.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1663459200000.0,
+  y: 39.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1665273600000.0,
+  y: 39.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1667088000000.0,
+  y: 39.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1670112000000.0,
+  y: 42.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1674345600000.0,
+  y: 42.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1676764800000.0,
+  y: 40.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1678924800000.0,
+  y: 39.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1681603200000.0,
+  y: 42.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1684022400000.0,
+  y: 42.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1686441600000.0,
+  y: 40.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1689379200000.0,
+  y: 39.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1691798400000.0,
+  y: 37.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1694217600000.0,
+  y: 36.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1696377600000.0,
+  y: 37.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1699142400000.0,
+  y: 35.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1701561600000.0,
+  y: 35.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1708732800000.0,
+  y: 34.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1711238400000.0,
+  y: 32.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1713657600000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1716076800000.0,
+  y: 29.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1718496000000.0,
+  y: 28.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1720915200000.0,
+  y: 28.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1723334400000.0,
+  y: 29.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1725667200000.0,
+  y: 28.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1728086400000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1731110400000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+}],
+  name: 'ALP',
+  color: '#e53440',
+  marker: {
+  radius: 5,
+  symbol: 'circle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1661040000000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1663459200000.0,
+  y: 10.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1665273600000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1667088000000.0,
+  y: 13.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1670112000000.0,
+  y: 11.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1674345600000.0,
+  y: 11.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1676764800000.0,
+  y: 10.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1678924800000.0,
+  y: 13.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1681603200000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1684022400000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1686441600000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1689379200000.0,
+  y: 11.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1691798400000.0,
+  y: 11.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1694217600000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1696377600000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1699142400000.0,
+  y: 13.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1701561600000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1708732800000.0,
+  y: 11.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1711238400000.0,
+  y: 13.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1713657600000.0,
+  y: 13.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1716076800000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1718496000000.0,
+  y: 14.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1720915200000.0,
+  y: 13.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1723334400000.0,
+  y: 13.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1725667200000.0,
+  y: 13.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1728086400000.0,
+  y: 12.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1731110400000.0,
+  y: 11.0,
+  id: 'Resolve Strategic'
+}],
+  name: 'Greens',
+  color: '#008943',
+  marker: {
+  radius: 5,
+  symbol: 'circle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1661040000000.0,
+  y: 28.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1663459200000.0,
+  y: 32.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1665273600000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1667088000000.0,
+  y: 32.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1670112000000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1674345600000.0,
+  y: 29.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1676764800000.0,
+  y: 31.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1678924800000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1681603200000.0,
+  y: 28.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1684022400000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1686441600000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1689379200000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1691798400000.0,
+  y: 33.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1694217600000.0,
+  y: 34.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1696377600000.0,
+  y: 31.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1699142400000.0,
+  y: 30.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1701561600000.0,
+  y: 34.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1708732800000.0,
+  y: 37.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1711238400000.0,
+  y: 35.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1713657600000.0,
+  y: 36.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1716076800000.0,
+  y: 36.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1718496000000.0,
+  y: 36.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1720915200000.0,
+  y: 38.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1723334400000.0,
+  y: 37.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1725667200000.0,
+  y: 37.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1728086400000.0,
+  y: 38.0,
+  id: 'Resolve Strategic'
+},{
+  x: 1731110400000.0,
+  y: 39.0,
+  id: 'Resolve Strategic'
+}],
+  name: 'L/NP',
+  color: '#1c4f9c',
+  marker: {
+  radius: 5,
+  symbol: 'circle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1670716800000.0,
+  y: 35.0,
+  id: 'Essential Research'
+},{
+  x: 1674345600000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1675641600000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1676764800000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1677888000000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1679270400000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1680393600000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1681603200000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1682812800000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1684022400000.0,
+  y: 35.0,
+  id: 'Essential Research'
+},{
+  x: 1685232000000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1686441600000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1687651200000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1688860800000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1690070400000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1691280000000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1692489600000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1693699200000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1694908800000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1696118400000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1698537600000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1699747200000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1700956800000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1702166400000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1706400000000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1707609600000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1708905600000.0,
+  y: 30.0,
+  id: 'Essential Research'
+},{
+  x: 1710028800000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1711238400000.0,
+  y: 29.0,
+  id: 'Essential Research'
+},{
+  x: 1712448000000.0,
+  y: 29.0,
+  id: 'Essential Research'
+},{
+  x: 1713657600000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1714867200000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1716076800000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1717286400000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1718496000000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1719705600000.0,
+  y: 30.0,
+  id: 'Essential Research'
+},{
+  x: 1720915200000.0,
+  y: 29.0,
+  id: 'Essential Research'
+},{
+  x: 1722124800000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1723334400000.0,
+  y: 28.0,
+  id: 'Essential Research'
+},{
+  x: 1724544000000.0,
+  y: 29.0,
+  id: 'Essential Research'
+},{
+  x: 1725753600000.0,
+  y: 30.0,
+  id: 'Essential Research'
+},{
+  x: 1726963200000.0,
+  y: 29.0,
+  id: 'Essential Research'
+},{
+  x: 1728172800000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1729382400000.0,
+  y: 28.0,
+  id: 'Essential Research'
+},{
+  x: 1730592000000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1731888000000.0,
+  y: 30.0,
+  id: 'Essential Research'
+}],
+  name: 'ALP',
+  color: '#e53440',
+  marker: {
+  radius: 7,
+  symbol: 'circle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1670716800000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1674345600000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1675641600000.0,
+  y: 17.0,
+  id: 'Essential Research'
+},{
+  x: 1676764800000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1677888000000.0,
+  y: 12.0,
+  id: 'Essential Research'
+},{
+  x: 1679270400000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1680393600000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1681603200000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1682812800000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1684022400000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1685232000000.0,
+  y: 15.0,
+  id: 'Essential Research'
+},{
+  x: 1686441600000.0,
+  y: 16.0,
+  id: 'Essential Research'
+},{
+  x: 1687651200000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1688860800000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1690070400000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1691280000000.0,
+  y: 12.0,
+  id: 'Essential Research'
+},{
+  x: 1692489600000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1693699200000.0,
+  y: 15.0,
+  id: 'Essential Research'
+},{
+  x: 1694908800000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1696118400000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1698537600000.0,
+  y: 10.0,
+  id: 'Essential Research'
+},{
+  x: 1699747200000.0,
+  y: 12.0,
+  id: 'Essential Research'
+},{
+  x: 1700956800000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1702166400000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1706400000000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1707609600000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1708905600000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1710028800000.0,
+  y: 11.0,
+  id: 'Essential Research'
+},{
+  x: 1711238400000.0,
+  y: 11.0,
+  id: 'Essential Research'
+},{
+  x: 1712448000000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1713657600000.0,
+  y: 11.0,
+  id: 'Essential Research'
+},{
+  x: 1714867200000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1716076800000.0,
+  y: 10.0,
+  id: 'Essential Research'
+},{
+  x: 1717286400000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1718496000000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1719705600000.0,
+  y: 12.0,
+  id: 'Essential Research'
+},{
+  x: 1720915200000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1722124800000.0,
+  y: 11.0,
+  id: 'Essential Research'
+},{
+  x: 1723334400000.0,
+  y: 14.0,
+  id: 'Essential Research'
+},{
+  x: 1724544000000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1725753600000.0,
+  y: 13.0,
+  id: 'Essential Research'
+},{
+  x: 1726963200000.0,
+  y: 12.0,
+  id: 'Essential Research'
+},{
+  x: 1728172800000.0,
+  y: 12.0,
+  id: 'Essential Research'
+},{
+  x: 1729382400000.0,
+  y: 12.0,
+  id: 'Essential Research'
+},{
+  x: 1730592000000.0,
+  y: 12.0,
+  id: 'Essential Research'
+},{
+  x: 1731888000000.0,
+  y: 13.0,
+  id: 'Essential Research'
+}],
+  name: 'Greens',
+  color: '#008943',
+  marker: {
+  radius: 7,
+  symbol: 'circle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1670716800000.0,
+  y: 30.0,
+  id: 'Essential Research'
+},{
+  x: 1674345600000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1675641600000.0,
+  y: 30.0,
+  id: 'Essential Research'
+},{
+  x: 1676764800000.0,
+  y: 30.0,
+  id: 'Essential Research'
+},{
+  x: 1677888000000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1679270400000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1680393600000.0,
+  y: 30.0,
+  id: 'Essential Research'
+},{
+  x: 1681603200000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1682812800000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1684022400000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1685232000000.0,
+  y: 31.0,
+  id: 'Essential Research'
+},{
+  x: 1686441600000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1687651200000.0,
+  y: 30.0,
+  id: 'Essential Research'
+},{
+  x: 1688860800000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1690070400000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1691280000000.0,
+  y: 30.0,
+  id: 'Essential Research'
+},{
+  x: 1692489600000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1693699200000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1694908800000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1696118400000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1698537600000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1699747200000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1700956800000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1702166400000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1706400000000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1707609600000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1708905600000.0,
+  y: 35.0,
+  id: 'Essential Research'
+},{
+  x: 1710028800000.0,
+  y: 35.0,
+  id: 'Essential Research'
+},{
+  x: 1711238400000.0,
+  y: 36.0,
+  id: 'Essential Research'
+},{
+  x: 1712448000000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1713657600000.0,
+  y: 35.0,
+  id: 'Essential Research'
+},{
+  x: 1714867200000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1716076800000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1717286400000.0,
+  y: 36.0,
+  id: 'Essential Research'
+},{
+  x: 1718496000000.0,
+  y: 32.0,
+  id: 'Essential Research'
+},{
+  x: 1719705600000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1720915200000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1722124800000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1723334400000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1724544000000.0,
+  y: 33.0,
+  id: 'Essential Research'
+},{
+  x: 1725753600000.0,
+  y: 35.0,
+  id: 'Essential Research'
+},{
+  x: 1726963200000.0,
+  y: 35.0,
+  id: 'Essential Research'
+},{
+  x: 1728172800000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1729382400000.0,
+  y: 35.0,
+  id: 'Essential Research'
+},{
+  x: 1730592000000.0,
+  y: 34.0,
+  id: 'Essential Research'
+},{
+  x: 1731888000000.0,
+  y: 35.0,
+  id: 'Essential Research'
+}],
+  name: 'L/NP',
+  color: '#1c4f9c',
+  marker: {
+  radius: 7,
+  symbol: 'circle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1671321600000.0,
+  y: 37.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1684281600000.0,
+  y: 34.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1695513600000.0,
+  y: 33.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1702771200000.0,
+  y: 31.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1704931200000.0,
+  y: 31.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1708214400000.0,
+  y: 31.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1710115200000.0,
+  y: 31.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1713052800000.0,
+  y: 31.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1716076800000.0,
+  y: 32.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1718496000000.0,
+  y: 32.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1721347200000.0,
+  y: 31.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1724025600000.0,
+  y: 32.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1726358400000.0,
+  y: 30.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1729382400000.0,
+  y: 30.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1731801600000.0,
+  y: 30.0,
+  id: 'Freshwater Strategy'
+}],
+  name: 'ALP',
+  color: '#e53440',
+  marker: {
+  radius: 5,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1671321600000.0,
+  y: 12.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1684281600000.0,
+  y: 12.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1695513600000.0,
+  y: 13.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1702771200000.0,
+  y: 13.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1704931200000.0,
+  y: 14.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1708214400000.0,
+  y: 14.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1710115200000.0,
+  y: 14.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1713052800000.0,
+  y: 13.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1716076800000.0,
+  y: 14.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1718496000000.0,
+  y: 13.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1721347200000.0,
+  y: 13.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1724025600000.0,
+  y: 12.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1726358400000.0,
+  y: 13.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1729382400000.0,
+  y: 13.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1731801600000.0,
+  y: 14.0,
+  id: 'Freshwater Strategy'
+}],
+  name: 'Greens',
+  color: '#008943',
+  marker: {
+  radius: 5,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1671321600000.0,
+  y: 37.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1684281600000.0,
+  y: 37.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1695513600000.0,
+  y: 37.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1702771200000.0,
+  y: 39.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1704931200000.0,
+  y: 39.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1708214400000.0,
+  y: 38.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1710115200000.0,
+  y: 39.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1713052800000.0,
+  y: 40.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1716076800000.0,
+  y: 40.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1718496000000.0,
+  y: 40.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1721347200000.0,
+  y: 40.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1724025600000.0,
+  y: 41.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1726358400000.0,
+  y: 42.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1729382400000.0,
+  y: 41.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1731801600000.0,
+  y: 40.0,
+  id: 'Freshwater Strategy'
+}],
+  name: 'L/NP',
+  color: '#1c4f9c',
+  marker: {
+  radius: 5,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1691971200000.0,
+  y: 38.0,
+  id: 'RedBridge Group'
+},{
+  x: 1693785600000.0,
+  y: 37.0,
+  id: 'RedBridge Group'
+},{
+  x: 1698883200000.0,
+  y: 34.0,
+  id: 'RedBridge Group'
+},{
+  x: 1702166400000.0,
+  y: 33.0,
+  id: 'RedBridge Group'
+},{
+  x: 1707264000000.0,
+  y: 33.0,
+  id: 'RedBridge Group'
+},{
+  x: 1714089600000.0,
+  y: 33.0,
+  id: 'RedBridge Group'
+},{
+  x: 1721347200000.0,
+  y: 32.0,
+  id: 'RedBridge Group'
+},{
+  x: 1724716800000.0,
+  y: 33.0,
+  id: 'RedBridge Group'
+},{
+  x: 1731456000000.0,
+  y: 34.0,
+  id: 'RedBridge Group'
+}],
+  name: 'ALP',
+  color: '#e53440',
+  marker: {
+  radius: 5,
+  symbol: 'triangle-down'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1691971200000.0,
+  y: 10.0,
+  id: 'RedBridge Group'
+},{
+  x: 1693785600000.0,
+  y: 13.0,
+  id: 'RedBridge Group'
+},{
+  x: 1698883200000.0,
+  y: 14.0,
+  id: 'RedBridge Group'
+},{
+  x: 1702166400000.0,
+  y: 13.0,
+  id: 'RedBridge Group'
+},{
+  x: 1707264000000.0,
+  y: 13.0,
+  id: 'RedBridge Group'
+},{
+  x: 1714089600000.0,
+  y: 12.0,
+  id: 'RedBridge Group'
+},{
+  x: 1721347200000.0,
+  y: 11.0,
+  id: 'RedBridge Group'
+},{
+  x: 1724716800000.0,
+  y: 12.0,
+  id: 'RedBridge Group'
+},{
+  x: 1731456000000.0,
+  y: 11.0,
+  id: 'RedBridge Group'
+}],
+  name: 'Greens',
+  color: '#008943',
+  marker: {
+  radius: 5,
+  symbol: 'triangle-down'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1691971200000.0,
+  y: 32.0,
+  id: 'RedBridge Group'
+},{
+  x: 1693785600000.0,
+  y: 36.0,
+  id: 'RedBridge Group'
+},{
+  x: 1698883200000.0,
+  y: 35.0,
+  id: 'RedBridge Group'
+},{
+  x: 1702166400000.0,
+  y: 35.0,
+  id: 'RedBridge Group'
+},{
+  x: 1707264000000.0,
+  y: 38.0,
+  id: 'RedBridge Group'
+},{
+  x: 1714089600000.0,
+  y: 37.0,
+  id: 'RedBridge Group'
+},{
+  x: 1721347200000.0,
+  y: 41.0,
+  id: 'RedBridge Group'
+},{
+  x: 1724716800000.0,
+  y: 38.0,
+  id: 'RedBridge Group'
+},{
+  x: 1731456000000.0,
+  y: 39.0,
+  id: 'RedBridge Group'
+}],
+  name: 'L/NP',
+  color: '#1c4f9c',
+  marker: {
+  radius: 5,
+  symbol: 'triangle-down'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1693526400000.0,
+  y: 35.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1695340800000.0,
+  y: 36.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1696550400000.0,
+  y: 34.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1697068800000.0,
+  y: 36.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1698883200000.0,
+  y: 35.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1700697600000.0,
+  y: 31.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1702598400000.0,
+  y: 33.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1706918400000.0,
+  y: 34.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1708646400000.0,
+  y: 33.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1711152000000.0,
+  y: 32.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1713398400000.0,
+  y: 33.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1715990400000.0,
+  y: 34.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1717718400000.0,
+  y: 33.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1719532800000.0,
+  y: 32.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1721347200000.0,
+  y: 33.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1723161600000.0,
+  y: 32.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1724976000000.0,
+  y: 32.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1726790400000.0,
+  y: 31.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1728604800000.0,
+  y: 31.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1731024000000.0,
+  y: 33.0,
+  id: 'Newspoll Pyxis'
+}],
+  name: 'ALP',
+  color: '#e53440',
+  marker: {
+  radius: 5,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1693526400000.0,
+  y: 13.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1695340800000.0,
+  y: 11.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1696550400000.0,
+  y: 12.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1697068800000.0,
+  y: 12.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1698883200000.0,
+  y: 12.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1700697600000.0,
+  y: 13.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1702598400000.0,
+  y: 13.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1706918400000.0,
+  y: 12.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1708646400000.0,
+  y: 12.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1711152000000.0,
+  y: 13.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1713398400000.0,
+  y: 12.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1715990400000.0,
+  y: 13.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1717718400000.0,
+  y: 11.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1719532800000.0,
+  y: 13.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1721347200000.0,
+  y: 13.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1723161600000.0,
+  y: 12.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1724976000000.0,
+  y: 12.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1726790400000.0,
+  y: 13.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1728604800000.0,
+  y: 12.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1731024000000.0,
+  y: 11.0,
+  id: 'Newspoll Pyxis'
+}],
+  name: 'Greens',
+  color: '#008943',
+  marker: {
+  radius: 5,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1693526400000.0,
+  y: 37.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1695340800000.0,
+  y: 36.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1696550400000.0,
+  y: 36.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1697068800000.0,
+  y: 35.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1698883200000.0,
+  y: 37.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1700697600000.0,
+  y: 38.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1702598400000.0,
+  y: 36.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1706918400000.0,
+  y: 36.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1708646400000.0,
+  y: 36.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1711152000000.0,
+  y: 37.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1713398400000.0,
+  y: 38.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1715990400000.0,
+  y: 37.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1717718400000.0,
+  y: 39.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1719532800000.0,
+  y: 36.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1721347200000.0,
+  y: 38.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1723161600000.0,
+  y: 39.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1724976000000.0,
+  y: 38.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1726790400000.0,
+  y: 38.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1728604800000.0,
+  y: 38.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1731024000000.0,
+  y: 40.0,
+  id: 'Newspoll Pyxis'
+}],
+  name: 'L/NP',
+  color: '#1c4f9c',
+  marker: {
+  radius: 5,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1695945600000.0,
+  y: 33.0,
+  id: 'YouGov'
+},{
+  x: 1696896000000.0,
+  y: 33.0,
+  id: 'YouGov'
+},{
+  x: 1699920000000.0,
+  y: 31.0,
+  id: 'YouGov'
+},{
+  x: 1701734400000.0,
+  y: 29.0,
+  id: 'YouGov'
+},{
+  x: 1705449600000.0,
+  y: 32.0,
+  id: 'YouGov'
+},{
+  x: 1707264000000.0,
+  y: 32.0,
+  id: 'YouGov'
+},{
+  x: 1709683200000.0,
+  y: 32.0,
+  id: 'YouGov'
+},{
+  x: 1711497600000.0,
+  y: 32.0,
+  id: 'YouGov'
+},{
+  x: 1713830400000.0,
+  y: 33.0,
+  id: 'YouGov'
+},{
+  x: 1715644800000.0,
+  y: 30.0,
+  id: 'YouGov'
+},{
+  x: 1717459200000.0,
+  y: 30.0,
+  id: 'YouGov'
+},{
+  x: 1721692800000.0,
+  y: 31.0,
+  id: 'YouGov'
+},{
+  x: 1724803200000.0,
+  y: 32.0,
+  id: 'YouGov'
+},{
+  x: 1726704000000.0,
+  y: 30.0,
+  id: 'YouGov'
+}],
+  name: 'ALP',
+  color: '#e53440',
+  marker: {
+  radius: 7,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1695945600000.0,
+  y: 15.0,
+  id: 'YouGov'
+},{
+  x: 1696896000000.0,
+  y: 15.0,
+  id: 'YouGov'
+},{
+  x: 1699920000000.0,
+  y: 13.0,
+  id: 'YouGov'
+},{
+  x: 1701734400000.0,
+  y: 15.0,
+  id: 'YouGov'
+},{
+  x: 1705449600000.0,
+  y: 13.0,
+  id: 'YouGov'
+},{
+  x: 1707264000000.0,
+  y: 14.0,
+  id: 'YouGov'
+},{
+  x: 1709683200000.0,
+  y: 15.0,
+  id: 'YouGov'
+},{
+  x: 1711497600000.0,
+  y: 13.0,
+  id: 'YouGov'
+},{
+  x: 1713830400000.0,
+  y: 13.0,
+  id: 'YouGov'
+},{
+  x: 1715644800000.0,
+  y: 13.0,
+  id: 'YouGov'
+},{
+  x: 1717459200000.0,
+  y: 14.0,
+  id: 'YouGov'
+},{
+  x: 1721692800000.0,
+  y: 13.0,
+  id: 'YouGov'
+},{
+  x: 1724803200000.0,
+  y: 13.0,
+  id: 'YouGov'
+},{
+  x: 1726704000000.0,
+  y: 14.0,
+  id: 'YouGov'
+}],
+  name: 'Greens',
+  color: '#008943',
+  marker: {
+  radius: 7,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1695945600000.0,
+  y: 36.0,
+  id: 'YouGov'
+},{
+  x: 1696896000000.0,
+  y: 36.0,
+  id: 'YouGov'
+},{
+  x: 1699920000000.0,
+  y: 36.0,
+  id: 'YouGov'
+},{
+  x: 1701734400000.0,
+  y: 37.0,
+  id: 'YouGov'
+},{
+  x: 1705449600000.0,
+  y: 37.0,
+  id: 'YouGov'
+},{
+  x: 1707264000000.0,
+  y: 36.0,
+  id: 'YouGov'
+},{
+  x: 1709683200000.0,
+  y: 37.0,
+  id: 'YouGov'
+},{
+  x: 1711497600000.0,
+  y: 38.0,
+  id: 'YouGov'
+},{
+  x: 1713830400000.0,
+  y: 36.0,
+  id: 'YouGov'
+},{
+  x: 1715644800000.0,
+  y: 38.0,
+  id: 'YouGov'
+},{
+  x: 1717459200000.0,
+  y: 38.0,
+  id: 'YouGov'
+},{
+  x: 1721692800000.0,
+  y: 38.0,
+  id: 'YouGov'
+},{
+  x: 1724803200000.0,
+  y: 37.0,
+  id: 'YouGov'
+},{
+  x: 1726704000000.0,
+  y: 39.0,
+  id: 'YouGov'
+}],
+  name: 'L/NP',
+  color: '#1c4f9c',
+  marker: {
+  radius: 7,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1724889600000.0,
+  y: 29.0,
+  id: 'Wolf & Smith'
+}],
+  name: 'ALP',
+  color: '#e53440',
+  marker: {
+  radius: 7,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1724889600000.0,
+  y: 13.0,
+  id: 'Wolf & Smith'
+}],
+  name: 'Greens',
+  color: '#008943',
+  marker: {
+  radius: 7,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1724889600000.0,
+  y: 36.0,
+  id: 'Wolf & Smith'
+}],
+  name: 'L/NP',
+  color: '#1c4f9c',
+  marker: {
+  radius: 7,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [[1653091200000,
+32.6],
+[1653436800000,
+32.84],
+[1653782400000,
+33.07],
+[1654128000000,
+33.31],
+[1654473600000,
+33.55],
+[1654819200000,
+33.78],
+[1655164800000,
+34.02],
+[1655510400000,
+34.26],
+[1655856000000,
+34.43],
+[1656201600000,
+34.62],
+[1656547200000,
+34.8],
+[1656892800000,
+34.98],
+[1657238400000,
+35.16],
+[1657584000000,
+35.34],
+[1657929600000,
+35.53],
+[1658275200000,
+35.71],
+[1658620800000,
+35.89],
+[1658966400000,
+36.06],
+[1659312000000,
+36.24],
+[1659657600000,
+36.41],
+[1660003200000,
+36.57],
+[1660348800000,
+36.75],
+[1660694400000,
+36.98],
+[1661040000000,
+37.11],
+[1661385600000,
+37.0],
+[1661731200000,
+36.92],
+[1662076800000,
+36.89],
+[1662422400000,
+36.88],
+[1662768000000,
+36.9],
+[1663113600000,
+36.95],
+[1663459200000,
+36.98],
+[1663804800000,
+36.95],
+[1664150400000,
+36.92],
+[1664496000000,
+36.92],
+[1664841600000,
+36.89],
+[1665187200000,
+36.87],
+[1665532800000,
+36.89],
+[1665878400000,
+36.9],
+[1666224000000,
+36.9],
+[1666569600000,
+36.92],
+[1666915200000,
+36.95],
+[1667260800000,
+36.93],
+[1667606400000,
+36.91],
+[1667952000000,
+36.92],
+[1668297600000,
+36.95],
+[1668643200000,
+36.98],
+[1668988800000,
+37.03],
+[1669334400000,
+37.12],
+[1669680000000,
+37.21],
+[1670025600000,
+37.36],
+[1670371200000,
+37.42],
+[1670716800000,
+37.49],
+[1671062400000,
+37.57],
+[1671408000000,
+37.62],
+[1671753600000,
+37.69],
+[1672099200000,
+37.76],
+[1672444800000,
+37.84],
+[1672790400000,
+37.9],
+[1673136000000,
+37.95],
+[1673481600000,
+37.94],
+[1673827200000,
+37.88],
+[1674172800000,
+37.78],
+[1674518400000,
+37.63],
+[1674864000000,
+37.46],
+[1675209600000,
+37.29],
+[1675555200000,
+37.12],
+[1675900800000,
+37.03],
+[1676246400000,
+36.93],
+[1676592000000,
+36.83],
+[1676937600000,
+36.74],
+[1677283200000,
+36.67],
+[1677628800000,
+36.59],
+[1677974400000,
+36.57],
+[1678320000000,
+36.6],
+[1678665600000,
+36.63],
+[1679011200000,
+36.59],
+[1679356800000,
+36.48],
+[1679702400000,
+36.37],
+[1680048000000,
+36.29],
+[1680393600000,
+36.21],
+[1680739200000,
+36.32],
+[1681084800000,
+36.43],
+[1681430400000,
+36.52],
+[1681776000000,
+36.48],
+[1682121600000,
+36.39],
+[1682467200000,
+36.32],
+[1682812800000,
+36.27],
+[1683158400000,
+36.3],
+[1683504000000,
+36.35],
+[1683849600000,
+36.42],
+[1684195200000,
+36.31],
+[1684540800000,
+36.2],
+[1684886400000,
+36.14],
+[1685232000000,
+36.09],
+[1685577600000,
+36.05],
+[1685923200000,
+36.02],
+[1686268800000,
+36.0],
+[1686614400000,
+35.96],
+[1686960000000,
+35.9],
+[1687305600000,
+35.8],
+[1687651200000,
+35.67],
+[1687996800000,
+35.52],
+[1688342400000,
+35.33],
+[1688688000000,
+35.12],
+[1689033600000,
+35.03],
+[1689379200000,
+34.94],
+[1689724800000,
+34.74],
+[1690070400000,
+34.57],
+[1690416000000,
+34.52],
+[1690761600000,
+34.46],
+[1691107200000,
+34.39],
+[1691452800000,
+34.34],
+[1691798400000,
+34.3],
+[1692144000000,
+34.18],
+[1692489600000,
+34.05],
+[1692835200000,
+33.95],
+[1693180800000,
+33.82],
+[1693526400000,
+33.68],
+[1693872000000,
+33.6],
+[1694217600000,
+33.51],
+[1694563200000,
+33.44],
+[1694908800000,
+33.39],
+[1695254400000,
+33.38],
+[1695600000000,
+33.37],
+[1695945600000,
+33.41],
+[1696291200000,
+33.56],
+[1696636800000,
+33.36],
+[1696982400000,
+33.26],
+[1697328000000,
+33.14],
+[1697673600000,
+32.95],
+[1698019200000,
+32.8],
+[1698364800000,
+32.68],
+[1698710400000,
+32.55],
+[1699056000000,
+32.44],
+[1699401600000,
+32.18],
+[1699747200000,
+31.93],
+[1700092800000,
+31.72],
+[1700438400000,
+31.58],
+[1700784000000,
+31.54],
+[1701129600000,
+31.48],
+[1701475200000,
+31.43],
+[1701820800000,
+31.28],
+[1702166400000,
+31.28],
+[1702512000000,
+31.26],
+[1702857600000,
+31.26],
+[1703203200000,
+31.25],
+[1703548800000,
+31.24],
+[1703894400000,
+31.23],
+[1704240000000,
+31.22],
+[1704585600000,
+31.25],
+[1704931200000,
+31.38],
+[1705276800000,
+31.53],
+[1705622400000,
+31.63],
+[1705968000000,
+31.69],
+[1706313600000,
+31.73],
+[1706659200000,
+31.76],
+[1707004800000,
+31.76],
+[1707350400000,
+31.73],
+[1707696000000,
+31.7],
+[1708041600000,
+31.67],
+[1708387200000,
+31.64],
+[1708732800000,
+31.65],
+[1709078400000,
+31.7],
+[1709424000000,
+31.77],
+[1709769600000,
+31.7],
+[1710115200000,
+31.58],
+[1710460800000,
+31.43],
+[1710806400000,
+31.28],
+[1711152000000,
+31.13],
+[1711497600000,
+31.02],
+[1711843200000,
+30.89],
+[1712188800000,
+30.79],
+[1712534400000,
+30.72],
+[1712880000000,
+30.7],
+[1713225600000,
+30.71],
+[1713571200000,
+30.72],
+[1713916800000,
+30.8],
+[1714262400000,
+30.82],
+[1714608000000,
+30.79],
+[1714953600000,
+30.76],
+[1715299200000,
+30.71],
+[1715644800000,
+30.63],
+[1715990400000,
+30.55],
+[1716336000000,
+30.59],
+[1716681600000,
+30.62],
+[1717027200000,
+30.63],
+[1717372800000,
+30.58],
+[1717718400000,
+30.5],
+[1718064000000,
+30.38],
+[1718409600000,
+30.24],
+[1718755200000,
+30.29],
+[1719100800000,
+30.33],
+[1719446400000,
+30.31],
+[1719792000000,
+30.23],
+[1720137600000,
+30.07],
+[1720483200000,
+29.98],
+[1720828800000,
+29.92],
+[1721174400000,
+30.12],
+[1721520000000,
+30.3],
+[1721865600000,
+30.34],
+[1722211200000,
+30.3],
+[1722556800000,
+30.19],
+[1722902400000,
+30.07],
+[1723248000000,
+29.94],
+[1723593600000,
+30.05],
+[1723939200000,
+30.17],
+[1724284800000,
+30.23],
+[1724630400000,
+30.32],
+[1724976000000,
+30.23],
+[1725321600000,
+30.09],
+[1725667200000,
+30.01],
+[1726012800000,
+30.11],
+[1726358400000,
+30.21],
+[1726704000000,
+30.31],
+[1727049600000,
+30.32],
+[1727395200000,
+30.3],
+[1727740800000,
+30.28],
+[1728086400000,
+30.3],
+[1728432000000,
+30.31],
+[1728777600000,
+30.34],
+[1729123200000,
+30.38],
+[1729468800000,
+30.4],
+[1729814400000,
+30.41],
+[1730160000000,
+30.41],
+[1730505600000,
+30.42],
+[1730851200000,
+30.35],
+[1731196800000,
+30.33],
+[1731542400000,
+30.33],
+[1731888000000,
+30.32],
+[1732233600000,
+30.32],
+[1732579200000,
+30.32]],
+  id: 'ALP Voting Intention',
+  name: 'ALP',
+  color: '#e53440',
+  type: 'line'
+},
+{
+  data: [[1653091200000,
+12.3],
+[1653436800000,
+12.29],
+[1653782400000,
+12.28],
+[1654128000000,
+12.27],
+[1654473600000,
+12.27],
+[1654819200000,
+12.25],
+[1655164800000,
+12.25],
+[1655510400000,
+12.24],
+[1655856000000,
+12.23],
+[1656201600000,
+12.23],
+[1656547200000,
+12.23],
+[1656892800000,
+12.22],
+[1657238400000,
+12.22],
+[1657584000000,
+12.22],
+[1657929600000,
+12.22],
+[1658275200000,
+12.21],
+[1658620800000,
+12.21],
+[1658966400000,
+12.21],
+[1659312000000,
+12.2],
+[1659657600000,
+12.19],
+[1660003200000,
+12.18],
+[1660348800000,
+12.17],
+[1660694400000,
+12.17],
+[1661040000000,
+12.16],
+[1661385600000,
+12.15],
+[1661731200000,
+12.15],
+[1662076800000,
+12.15],
+[1662422400000,
+12.14],
+[1662768000000,
+12.14],
+[1663113600000,
+12.13],
+[1663459200000,
+12.12],
+[1663804800000,
+12.12],
+[1664150400000,
+12.11],
+[1664496000000,
+12.11],
+[1664841600000,
+12.11],
+[1665187200000,
+12.11],
+[1665532800000,
+12.12],
+[1665878400000,
+12.13],
+[1666224000000,
+12.13],
+[1666569600000,
+12.14],
+[1666915200000,
+12.16],
+[1667260800000,
+12.16],
+[1667606400000,
+12.17],
+[1667952000000,
+12.18],
+[1668297600000,
+12.2],
+[1668643200000,
+12.21],
+[1668988800000,
+12.23],
+[1669334400000,
+12.25],
+[1669680000000,
+12.27],
+[1670025600000,
+12.3],
+[1670371200000,
+12.31],
+[1670716800000,
+12.33],
+[1671062400000,
+12.34],
+[1671408000000,
+12.35],
+[1671753600000,
+12.36],
+[1672099200000,
+12.38],
+[1672444800000,
+12.39],
+[1672790400000,
+12.4],
+[1673136000000,
+12.42],
+[1673481600000,
+12.43],
+[1673827200000,
+12.44],
+[1674172800000,
+12.46],
+[1674518400000,
+12.47],
+[1674864000000,
+12.49],
+[1675209600000,
+12.51],
+[1675555200000,
+12.53],
+[1675900800000,
+12.54],
+[1676246400000,
+12.55],
+[1676592000000,
+12.56],
+[1676937600000,
+12.57],
+[1677283200000,
+12.58],
+[1677628800000,
+12.59],
+[1677974400000,
+12.61],
+[1678320000000,
+12.63],
+[1678665600000,
+12.65],
+[1679011200000,
+12.67],
+[1679356800000,
+12.69],
+[1679702400000,
+12.7],
+[1680048000000,
+12.72],
+[1680393600000,
+12.73],
+[1680739200000,
+12.74],
+[1681084800000,
+12.76],
+[1681430400000,
+12.78],
+[1681776000000,
+12.79],
+[1682121600000,
+12.81],
+[1682467200000,
+12.82],
+[1682812800000,
+12.83],
+[1683158400000,
+12.84],
+[1683504000000,
+12.85],
+[1683849600000,
+12.87],
+[1684195200000,
+12.88],
+[1684540800000,
+12.89],
+[1684886400000,
+12.91],
+[1685232000000,
+12.92],
+[1685577600000,
+12.93],
+[1685923200000,
+12.94],
+[1686268800000,
+12.95],
+[1686614400000,
+12.96],
+[1686960000000,
+12.96],
+[1687305600000,
+12.96],
+[1687651200000,
+12.97],
+[1687996800000,
+12.97],
+[1688342400000,
+12.97],
+[1688688000000,
+12.97],
+[1689033600000,
+12.97],
+[1689379200000,
+12.97],
+[1689724800000,
+12.98],
+[1690070400000,
+12.98],
+[1690416000000,
+12.98],
+[1690761600000,
+12.99],
+[1691107200000,
+12.99],
+[1691452800000,
+13.0],
+[1691798400000,
+13.0],
+[1692144000000,
+13.02],
+[1692489600000,
+13.05],
+[1692835200000,
+13.07],
+[1693180800000,
+13.09],
+[1693526400000,
+13.11],
+[1693872000000,
+13.12],
+[1694217600000,
+13.13],
+[1694563200000,
+13.14],
+[1694908800000,
+13.15],
+[1695254400000,
+13.16],
+[1695600000000,
+13.17],
+[1695945600000,
+13.17],
+[1696291200000,
+13.18],
+[1696636800000,
+13.19],
+[1696982400000,
+13.19],
+[1697328000000,
+13.19],
+[1697673600000,
+13.19],
+[1698019200000,
+13.19],
+[1698364800000,
+13.19],
+[1698710400000,
+13.19],
+[1699056000000,
+13.19],
+[1699401600000,
+13.18],
+[1699747200000,
+13.18],
+[1700092800000,
+13.18],
+[1700438400000,
+13.18],
+[1700784000000,
+13.18],
+[1701129600000,
+13.18],
+[1701475200000,
+13.17],
+[1701820800000,
+13.17],
+[1702166400000,
+13.17],
+[1702512000000,
+13.15],
+[1702857600000,
+13.14],
+[1703203200000,
+13.14],
+[1703548800000,
+13.13],
+[1703894400000,
+13.13],
+[1704240000000,
+13.12],
+[1704585600000,
+13.11],
+[1704931200000,
+13.11],
+[1705276800000,
+13.1],
+[1705622400000,
+13.1],
+[1705968000000,
+13.11],
+[1706313600000,
+13.11],
+[1706659200000,
+13.11],
+[1707004800000,
+13.11],
+[1707350400000,
+13.12],
+[1707696000000,
+13.12],
+[1708041600000,
+13.11],
+[1708387200000,
+13.11],
+[1708732800000,
+13.11],
+[1709078400000,
+13.12],
+[1709424000000,
+13.13],
+[1709769600000,
+13.13],
+[1710115200000,
+13.14],
+[1710460800000,
+13.15],
+[1710806400000,
+13.16],
+[1711152000000,
+13.17],
+[1711497600000,
+13.18],
+[1711843200000,
+13.19],
+[1712188800000,
+13.2],
+[1712534400000,
+13.21],
+[1712880000000,
+13.21],
+[1713225600000,
+13.21],
+[1713571200000,
+13.21],
+[1713916800000,
+13.21],
+[1714262400000,
+13.21],
+[1714608000000,
+13.21],
+[1714953600000,
+13.21],
+[1715299200000,
+13.21],
+[1715644800000,
+13.21],
+[1715990400000,
+13.21],
+[1716336000000,
+13.21],
+[1716681600000,
+13.22],
+[1717027200000,
+13.22],
+[1717372800000,
+13.22],
+[1717718400000,
+13.22],
+[1718064000000,
+13.22],
+[1718409600000,
+13.22],
+[1718755200000,
+13.2],
+[1719100800000,
+13.19],
+[1719446400000,
+13.18],
+[1719792000000,
+13.17],
+[1720137600000,
+13.15],
+[1720483200000,
+13.14],
+[1720828800000,
+13.13],
+[1721174400000,
+13.12],
+[1721520000000,
+13.11],
+[1721865600000,
+13.1],
+[1722211200000,
+13.09],
+[1722556800000,
+13.09],
+[1722902400000,
+13.09],
+[1723248000000,
+13.1],
+[1723593600000,
+13.09],
+[1723939200000,
+13.08],
+[1724284800000,
+13.08],
+[1724630400000,
+13.08],
+[1724976000000,
+13.08],
+[1725321600000,
+13.08],
+[1725667200000,
+13.08],
+[1726012800000,
+13.07],
+[1726358400000,
+13.06],
+[1726704000000,
+13.05],
+[1727049600000,
+13.04],
+[1727395200000,
+13.03],
+[1727740800000,
+13.02],
+[1728086400000,
+13.02],
+[1728432000000,
+13.01],
+[1728777600000,
+13.01],
+[1729123200000,
+13.0],
+[1729468800000,
+12.99],
+[1729814400000,
+12.99],
+[1730160000000,
+12.98],
+[1730505600000,
+12.97],
+[1730851200000,
+12.96],
+[1731196800000,
+12.95],
+[1731542400000,
+12.95],
+[1731888000000,
+12.96],
+[1732233600000,
+12.96],
+[1732579200000,
+12.96]],
+  id: 'Greens Voting Intention',
+  name: 'Greens',
+  color: '#008943',
+  type: 'line'
+},
+{
+  data: [[1653091200000,
+35.7],
+[1653436800000,
+35.62],
+[1653782400000,
+35.54],
+[1654128000000,
+35.45],
+[1654473600000,
+35.37],
+[1654819200000,
+35.29],
+[1655164800000,
+35.2],
+[1655510400000,
+35.12],
+[1655856000000,
+35.05],
+[1656201600000,
+34.97],
+[1656547200000,
+34.89],
+[1656892800000,
+34.81],
+[1657238400000,
+34.73],
+[1657584000000,
+34.65],
+[1657929600000,
+34.57],
+[1658275200000,
+34.5],
+[1658620800000,
+34.42],
+[1658966400000,
+34.35],
+[1659312000000,
+34.29],
+[1659657600000,
+34.25],
+[1660003200000,
+34.21],
+[1660348800000,
+34.16],
+[1660694400000,
+34.05],
+[1661040000000,
+34.0],
+[1661385600000,
+34.1],
+[1661731200000,
+34.16],
+[1662076800000,
+34.17],
+[1662422400000,
+34.22],
+[1662768000000,
+34.26],
+[1663113600000,
+34.27],
+[1663459200000,
+34.29],
+[1663804800000,
+34.35],
+[1664150400000,
+34.39],
+[1664496000000,
+34.43],
+[1664841600000,
+34.45],
+[1665187200000,
+34.46],
+[1665532800000,
+34.47],
+[1665878400000,
+34.48],
+[1666224000000,
+34.49],
+[1666569600000,
+34.48],
+[1666915200000,
+34.45],
+[1667260800000,
+34.44],
+[1667606400000,
+34.44],
+[1667952000000,
+34.39],
+[1668297600000,
+34.32],
+[1668643200000,
+34.23],
+[1668988800000,
+34.12],
+[1669334400000,
+33.99],
+[1669680000000,
+33.83],
+[1670025600000,
+33.63],
+[1670371200000,
+33.47],
+[1670716800000,
+33.31],
+[1671062400000,
+33.18],
+[1671408000000,
+33.08],
+[1671753600000,
+32.97],
+[1672099200000,
+32.86],
+[1672444800000,
+32.75],
+[1672790400000,
+32.63],
+[1673136000000,
+32.53],
+[1673481600000,
+32.48],
+[1673827200000,
+32.45],
+[1674172800000,
+32.45],
+[1674518400000,
+32.48],
+[1674864000000,
+32.53],
+[1675209600000,
+32.57],
+[1675555200000,
+32.61],
+[1675900800000,
+32.62],
+[1676246400000,
+32.65],
+[1676592000000,
+32.68],
+[1676937600000,
+32.7],
+[1677283200000,
+32.73],
+[1677628800000,
+32.74],
+[1677974400000,
+32.72],
+[1678320000000,
+32.66],
+[1678665600000,
+32.61],
+[1679011200000,
+32.59],
+[1679356800000,
+32.62],
+[1679702400000,
+32.66],
+[1680048000000,
+32.72],
+[1680393600000,
+32.77],
+[1680739200000,
+32.7],
+[1681084800000,
+32.63],
+[1681430400000,
+32.57],
+[1681776000000,
+32.6],
+[1682121600000,
+32.65],
+[1682467200000,
+32.7],
+[1682812800000,
+32.73],
+[1683158400000,
+32.73],
+[1683504000000,
+32.71],
+[1683849600000,
+32.66],
+[1684195200000,
+32.71],
+[1684540800000,
+32.74],
+[1684886400000,
+32.77],
+[1685232000000,
+32.79],
+[1685577600000,
+32.82],
+[1685923200000,
+32.83],
+[1686268800000,
+32.83],
+[1686614400000,
+32.86],
+[1686960000000,
+32.92],
+[1687305600000,
+32.98],
+[1687651200000,
+33.05],
+[1687996800000,
+33.14],
+[1688342400000,
+33.25],
+[1688688000000,
+33.38],
+[1689033600000,
+33.45],
+[1689379200000,
+33.52],
+[1689724800000,
+33.65],
+[1690070400000,
+33.75],
+[1690416000000,
+33.8],
+[1690761600000,
+33.84],
+[1691107200000,
+33.89],
+[1691452800000,
+33.95],
+[1691798400000,
+34.01],
+[1692144000000,
+34.1],
+[1692489600000,
+34.19],
+[1692835200000,
+34.25],
+[1693180800000,
+34.33],
+[1693526400000,
+34.41],
+[1693872000000,
+34.44],
+[1694217600000,
+34.46],
+[1694563200000,
+34.46],
+[1694908800000,
+34.45],
+[1695254400000,
+34.45],
+[1695600000000,
+34.44],
+[1695945600000,
+34.41],
+[1696291200000,
+34.32],
+[1696636800000,
+34.41],
+[1696982400000,
+34.47],
+[1697328000000,
+34.51],
+[1697673600000,
+34.59],
+[1698019200000,
+34.65],
+[1698364800000,
+34.7],
+[1698710400000,
+34.75],
+[1699056000000,
+34.8],
+[1699401600000,
+34.99],
+[1699747200000,
+35.16],
+[1700092800000,
+35.3],
+[1700438400000,
+35.41],
+[1700784000000,
+35.47],
+[1701129600000,
+35.53],
+[1701475200000,
+35.61],
+[1701820800000,
+35.69],
+[1702166400000,
+35.72],
+[1702512000000,
+35.77],
+[1702857600000,
+35.82],
+[1703203200000,
+35.86],
+[1703548800000,
+35.89],
+[1703894400000,
+35.93],
+[1704240000000,
+35.96],
+[1704585600000,
+35.98],
+[1704931200000,
+35.95],
+[1705276800000,
+35.91],
+[1705622400000,
+35.89],
+[1705968000000,
+35.91],
+[1706313600000,
+35.93],
+[1706659200000,
+35.95],
+[1707004800000,
+35.99],
+[1707350400000,
+36.03],
+[1707696000000,
+36.07],
+[1708041600000,
+36.11],
+[1708387200000,
+36.16],
+[1708732800000,
+36.2],
+[1709078400000,
+36.16],
+[1709424000000,
+36.11],
+[1709769600000,
+36.15],
+[1710115200000,
+36.19],
+[1710460800000,
+36.24],
+[1710806400000,
+36.29],
+[1711152000000,
+36.34],
+[1711497600000,
+36.38],
+[1711843200000,
+36.42],
+[1712188800000,
+36.44],
+[1712534400000,
+36.45],
+[1712880000000,
+36.45],
+[1713225600000,
+36.43],
+[1713571200000,
+36.4],
+[1713916800000,
+36.34],
+[1714262400000,
+36.32],
+[1714608000000,
+36.33],
+[1714953600000,
+36.34],
+[1715299200000,
+36.37],
+[1715644800000,
+36.4],
+[1715990400000,
+36.42],
+[1716336000000,
+36.38],
+[1716681600000,
+36.34],
+[1717027200000,
+36.35],
+[1717372800000,
+36.38],
+[1717718400000,
+36.42],
+[1718064000000,
+36.49],
+[1718409600000,
+36.57],
+[1718755200000,
+36.57],
+[1719100800000,
+36.59],
+[1719446400000,
+36.62],
+[1719792000000,
+36.71],
+[1720137600000,
+36.85],
+[1720483200000,
+36.95],
+[1720828800000,
+37.03],
+[1721174400000,
+36.97],
+[1721520000000,
+36.89],
+[1721865600000,
+36.86],
+[1722211200000,
+36.88],
+[1722556800000,
+36.92],
+[1722902400000,
+36.98],
+[1723248000000,
+37.04],
+[1723593600000,
+36.99],
+[1723939200000,
+36.94],
+[1724284800000,
+36.89],
+[1724630400000,
+36.83],
+[1724976000000,
+36.87],
+[1725321600000,
+36.97],
+[1725667200000,
+37.04],
+[1726012800000,
+37.03],
+[1726358400000,
+37.02],
+[1726704000000,
+36.99],
+[1727049600000,
+37.02],
+[1727395200000,
+37.07],
+[1727740800000,
+37.11],
+[1728086400000,
+37.13],
+[1728432000000,
+37.13],
+[1728777600000,
+37.12],
+[1729123200000,
+37.12],
+[1729468800000,
+37.13],
+[1729814400000,
+37.17],
+[1730160000000,
+37.21],
+[1730505600000,
+37.26],
+[1730851200000,
+37.36],
+[1731196800000,
+37.39],
+[1731542400000,
+37.39],
+[1731888000000,
+37.39],
+[1732233600000,
+37.39],
+[1732579200000,
+37.4]],
+  id: 'L/NP Voting Intention',
+  name: 'L/NP',
+  color: '#1c4f9c',
+  type: 'line'
+}],
+  subtitle: {
+  align: 'left',
+  text: 'Source: Poll data aggregated from <a href="https://www.pollbludger.net/fed2025/bludgertrack/polldata.htm?">PollBludger.net</a>, media reports and other sources'
+},
+  title: {
+  align: 'left',
+  text: 'First Preference Voting Intention over time'
+},
+  xAxis: {
+  endOnTick: true,
+  showLastLabel: true,
+  startOnTick: true,
+  tickLength: 0,
+  title: {
+  text: 'Date'
+},
+  type: 'datetime'
+},
+  yAxis: {
+  endOnTick: true,
+  gridLineWidth: 0,
+  labels: {
+  format: '{value} %'
+},
+  showLastLabel: true,
+  startOnTick: true,
+  tickLength: 0,
+  title: {
+  text: 'Voting Intention'
+}
+}
+},
+);
+});
+
+        </script>
+        </div>
+    </body>
+
+    </html>
+    

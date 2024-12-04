@@ -1,0 +1,125 @@
+
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+        <link type="text/css" rel="stylesheet" href="TASK3.css" media="all" />
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
+
+    <body>
+
+        <div id="container" style="min-width: 310px; max-width: 1200px; height: 300px; margin: 0 auto">
+
+        <script type="text/javascript">
+
+        Highcharts.setOptions({
+  credits: {
+  enabled: true,
+  style: {
+  color: '#cccccc',
+  fontSize: '10px'
+},
+  text: 'Sam Vaughan (2024)'
+}
+});
+        Highcharts.SVGRenderer.prototype.symbols.cross = function (x, y, w, h) {
+                return ['M', x, y, 'L', x + w, y + h, 'M', x + w, y, 'L', x, y + h, 'z'];
+            };
+            if (Highcharts.VMLRenderer) {
+                Highcharts.VMLRenderer.prototype.symbols.cross = Highcharts.SVGRenderer.prototype.symbols.cross;
+            }
+        Highcharts.SVGRenderer.prototype.symbols.plus = function (x, y, w, h) {
+                return ['M', x, y + h/2, 'L', x + w, y+h/2, 'M', x + w/2, y, 'L', x+w/2, y + h, 'z'];
+            };
+            if (Highcharts.VMLRenderer) {
+                Highcharts.VMLRenderer.prototype.symbols.cross = Highcharts.SVGRenderer.prototype.symbols.cross;
+            }
+
+        document.addEventListener('DOMContentLoaded', function() {
+Highcharts.chart('container',
+{
+  chart: {
+  inverted: true,
+  type: 'boxplot',
+  zooming: {
+  type: 'xy'
+}
+},
+  legend: {
+  enabled: false
+},
+  plotOptions: {
+  boxplot: {
+  medianColor: '#FFFFFF',
+  medianWidth: 5,
+  stemWidth: 5,
+  whiskerLength: '30%',
+  whiskerWidth: 5,
+  lineWidth: 3,
+  type: 'boxplot'
+}
+},
+  series: [{
+  data: [{
+  high: 52.0,
+  low: 48.3,
+  median: 50.1,
+  q1: 49.2,
+  q3: 51.0,
+  x: 0,
+  color: '#e53440',
+  fillColor: '#e53440',
+name: 'ALP_2pp'
+}],
+  type: 'boxplot'
+},
+{
+  data: [{
+  high: 51.5,
+  low: 48.1,
+  median: 49.8,
+  q1: 49.0,
+  q3: 50.7,
+  x: 1,
+  color: '#1c4f9c',
+  fillColor: '#1c4f9c',
+name: 'LNP_2pp'
+}],
+  type: 'boxplot'
+}],
+  subtitle: {
+  align: 'left',
+  text: 'Source: Poll data aggregated from <a href="https://www.pollbludger.net/fed2025/bludgertrack/polldata.htm?">PollBludger.net</a>, media reports and other sources'
+},
+  title: {
+  align: 'left',
+  text: 'Two Party Preferred Voting Intention if an election were held tomorrow'
+},
+  tooltip: {
+  headerFormat: '{point.key}<br/>',
+  pointFormat: 'Median: {point.median}%<br/>95% confidence interval is<br/>{point.q1}% to {point.q3}%'
+},
+  xAxis: {
+  categories: ['ALP',
+'LNP',
+'GRN']
+},
+  yAxis: {
+  title: {
+  text: 'Vote (%)'
+}
+}
+},
+);
+});
+
+        </script>
+        </div>
+    </body>
+
+    </html>
+    

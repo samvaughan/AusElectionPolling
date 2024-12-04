@@ -1,0 +1,3098 @@
+
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+        <link type="text/css" rel="stylesheet" href="TASK3.css" media="all" />
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
+
+    <body>
+
+        <div id="container" style="min-width: 310px; max-width: 1200px; height: 600px; margin: 0 auto">
+
+        <script type="text/javascript">
+
+        Highcharts.setOptions({
+  credits: {
+  enabled: true,
+  style: {
+  color: '#cccccc',
+  fontSize: '10px'
+},
+  text: 'Sam Vaughan (2024)'
+}
+});
+        Highcharts.SVGRenderer.prototype.symbols.cross = function (x, y, w, h) {
+                return ['M', x, y, 'L', x + w, y + h, 'M', x + w, y, 'L', x, y + h, 'z'];
+            };
+            if (Highcharts.VMLRenderer) {
+                Highcharts.VMLRenderer.prototype.symbols.cross = Highcharts.SVGRenderer.prototype.symbols.cross;
+            }
+        Highcharts.SVGRenderer.prototype.symbols.plus = function (x, y, w, h) {
+                return ['M', x, y + h/2, 'L', x + w, y+h/2, 'M', x + w/2, y, 'L', x+w/2, y + h, 'z'];
+            };
+            if (Highcharts.VMLRenderer) {
+                Highcharts.VMLRenderer.prototype.symbols.cross = Highcharts.SVGRenderer.prototype.symbols.cross;
+            }
+
+        document.addEventListener('DOMContentLoaded', function() {
+Highcharts.chart('container',
+{
+  accessibility: {
+  point: {
+  valueDescriptionFormat: '{point.name}, Date: {point.x} Poll Result: {point.y}'
+}
+},
+  chart: {
+  panKey: 'shift',
+  panning: {
+  enabled: true
+},
+  plotBorderWidth: 1,
+  type: 'scatter',
+  zooming: {
+  type: 'xy'
+}
+},
+  legend: {
+  enabled: false
+},
+  plotOptions: {
+  line: {
+  lineWidth: 10,
+  shadow: {
+  opacity: 0.8,
+  width: 6
+},
+  states: {
+  hover: {
+  enabled: false
+},
+  inactive: {
+  enabled: false
+}
+},
+  tooltip: {
+  pointFormat: '{series.name} support: <b>{point.y}%'
+},
+  type: 'line'
+},
+  scatter: {
+  jitter: {
+  x: 0.5
+},
+  marker: {
+  radius: 8,
+  states: {
+  hover: {
+  enabled: true
+},
+  inactive: {
+  enabled: true,
+  opacity: 0.25
+}
+}
+},
+  states: {
+  inactive: {
+  enabled: true
+}
+},
+  tooltip: {
+  pointFormatter: function() {
+
+            return Highcharts.dateFormat('%A, %e %B %Y', this.x) + '<br/>Poll Result: ' + this.y + '%<br/>' + 'Organisation:' + this.id
+                }
+},
+  type: 'scatter'
+}
+},
+  series: [{
+  data: [{
+  x: 1655596800000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1660435200000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1661040000000.0,
+  y: 52.7,
+  id: 'Roy Morgan'
+},{
+  x: 1661644800000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1662249600000.0,
+  y: 53.5,
+  id: 'Roy Morgan'
+},{
+  x: 1662854400000.0,
+  y: 53.6,
+  id: 'Roy Morgan'
+},{
+  x: 1663459200000.0,
+  y: 54.7,
+  id: 'Roy Morgan'
+},{
+  x: 1664064000000.0,
+  y: 54.5,
+  id: 'Roy Morgan'
+},{
+  x: 1664668800000.0,
+  y: 55.0,
+  id: 'Roy Morgan'
+},{
+  x: 1665273600000.0,
+  y: 54.9,
+  id: 'Roy Morgan'
+},{
+  x: 1665878400000.0,
+  y: 54.8,
+  id: 'Roy Morgan'
+},{
+  x: 1666483200000.0,
+  y: 54.5,
+  id: 'Roy Morgan'
+},{
+  x: 1667088000000.0,
+  y: 55.6,
+  id: 'Roy Morgan'
+},{
+  x: 1667692800000.0,
+  y: 53.3,
+  id: 'Roy Morgan'
+},{
+  x: 1668297600000.0,
+  y: 53.4,
+  id: 'Roy Morgan'
+},{
+  x: 1668902400000.0,
+  y: 53.4,
+  id: 'Roy Morgan'
+},{
+  x: 1669507200000.0,
+  y: 52.3,
+  id: 'Roy Morgan'
+},{
+  x: 1670112000000.0,
+  y: 54.6,
+  id: 'Roy Morgan'
+},{
+  x: 1670716800000.0,
+  y: 58.5,
+  id: 'Roy Morgan'
+},{
+  x: 1671148800000.0,
+  y: 58.7,
+  id: 'Roy Morgan'
+},{
+  x: 1673136000000.0,
+  y: 58.6,
+  id: 'Roy Morgan'
+},{
+  x: 1673740800000.0,
+  y: 59.4,
+  id: 'Roy Morgan'
+},{
+  x: 1674345600000.0,
+  y: 58.9,
+  id: 'Roy Morgan'
+},{
+  x: 1674950400000.0,
+  y: 57.0,
+  id: 'Roy Morgan'
+},{
+  x: 1675555200000.0,
+  y: 58.4,
+  id: 'Roy Morgan'
+},{
+  x: 1676160000000.0,
+  y: 56.4,
+  id: 'Roy Morgan'
+},{
+  x: 1676764800000.0,
+  y: 58.3,
+  id: 'Roy Morgan'
+},{
+  x: 1677369600000.0,
+  y: 56.5,
+  id: 'Roy Morgan'
+},{
+  x: 1677974400000.0,
+  y: 54.6,
+  id: 'Roy Morgan'
+},{
+  x: 1678579200000.0,
+  y: 56.3,
+  id: 'Roy Morgan'
+},{
+  x: 1679184000000.0,
+  y: 58.1,
+  id: 'Roy Morgan'
+},{
+  x: 1679788800000.0,
+  y: 56.8,
+  id: 'Roy Morgan'
+},{
+  x: 1680393600000.0,
+  y: 54.5,
+  id: 'Roy Morgan'
+},{
+  x: 1680998400000.0,
+  y: 56.2,
+  id: 'Roy Morgan'
+},{
+  x: 1681603200000.0,
+  y: 56.2,
+  id: 'Roy Morgan'
+},{
+  x: 1682208000000.0,
+  y: 56.5,
+  id: 'Roy Morgan'
+},{
+  x: 1682812800000.0,
+  y: 53.6,
+  id: 'Roy Morgan'
+},{
+  x: 1683417600000.0,
+  y: 54.7,
+  id: 'Roy Morgan'
+},{
+  x: 1684022400000.0,
+  y: 58.4,
+  id: 'Roy Morgan'
+},{
+  x: 1684627200000.0,
+  y: 55.3,
+  id: 'Roy Morgan'
+},{
+  x: 1685232000000.0,
+  y: 55.5,
+  id: 'Roy Morgan'
+},{
+  x: 1685836800000.0,
+  y: 55.4,
+  id: 'Roy Morgan'
+},{
+  x: 1686441600000.0,
+  y: 55.8,
+  id: 'Roy Morgan'
+},{
+  x: 1687046400000.0,
+  y: 57.0,
+  id: 'Roy Morgan'
+},{
+  x: 1687651200000.0,
+  y: 57.0,
+  id: 'Roy Morgan'
+},{
+  x: 1688256000000.0,
+  y: 56.0,
+  id: 'Roy Morgan'
+},{
+  x: 1688860800000.0,
+  y: 54.5,
+  id: 'Roy Morgan'
+},{
+  x: 1689465600000.0,
+  y: 52.5,
+  id: 'Roy Morgan'
+},{
+  x: 1690070400000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1690675200000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1691280000000.0,
+  y: 53.5,
+  id: 'Roy Morgan'
+},{
+  x: 1691884800000.0,
+  y: 54.5,
+  id: 'Roy Morgan'
+},{
+  x: 1692489600000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1693094400000.0,
+  y: 53.5,
+  id: 'Roy Morgan'
+},{
+  x: 1693699200000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1694304000000.0,
+  y: 52.5,
+  id: 'Roy Morgan'
+},{
+  x: 1694908800000.0,
+  y: 54.0,
+  id: 'Roy Morgan'
+},{
+  x: 1695513600000.0,
+  y: 54.0,
+  id: 'Roy Morgan'
+},{
+  x: 1696118400000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1696723200000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1697328000000.0,
+  y: 54.0,
+  id: 'Roy Morgan'
+},{
+  x: 1697932800000.0,
+  y: 49.5,
+  id: 'Roy Morgan'
+},{
+  x: 1698537600000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1699142400000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1699747200000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1700352000000.0,
+  y: 49.5,
+  id: 'Roy Morgan'
+},{
+  x: 1700956800000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1701561600000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1702166400000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1702771200000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1704585600000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1705190400000.0,
+  y: 51.5,
+  id: 'Roy Morgan'
+},{
+  x: 1705795200000.0,
+  y: 52.5,
+  id: 'Roy Morgan'
+},{
+  x: 1706400000000.0,
+  y: 50.5,
+  id: 'Roy Morgan'
+},{
+  x: 1707004800000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1708905600000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1709510400000.0,
+  y: 53.5,
+  id: 'Roy Morgan'
+},{
+  x: 1710115200000.0,
+  y: 51.5,
+  id: 'Roy Morgan'
+},{
+  x: 1710720000000.0,
+  y: 51.5,
+  id: 'Roy Morgan'
+},{
+  x: 1711324800000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1711843200000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1712448000000.0,
+  y: 49.5,
+  id: 'Roy Morgan'
+},{
+  x: 1713052800000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1713657600000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1714262400000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1714867200000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1715472000000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1716076800000.0,
+  y: 50.5,
+  id: 'Roy Morgan'
+},{
+  x: 1716681600000.0,
+  y: 48.5,
+  id: 'Roy Morgan'
+},{
+  x: 1717286400000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1717891200000.0,
+  y: 53.5,
+  id: 'Roy Morgan'
+},{
+  x: 1718496000000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1719100800000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1719705600000.0,
+  y: 52.5,
+  id: 'Roy Morgan'
+},{
+  x: 1720310400000.0,
+  y: 49.5,
+  id: 'Roy Morgan'
+},{
+  x: 1720915200000.0,
+  y: 51.5,
+  id: 'Roy Morgan'
+},{
+  x: 1721520000000.0,
+  y: 50.5,
+  id: 'Roy Morgan'
+},{
+  x: 1722124800000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1722729600000.0,
+  y: 51.5,
+  id: 'Roy Morgan'
+},{
+  x: 1723334400000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1723939200000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1724544000000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1725148800000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1725753600000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1726358400000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1726963200000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1727568000000.0,
+  y: 51.5,
+  id: 'Roy Morgan'
+},{
+  x: 1728172800000.0,
+  y: 52.0,
+  id: 'Roy Morgan'
+},{
+  x: 1728777600000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1729382400000.0,
+  y: 53.0,
+  id: 'Roy Morgan'
+},{
+  x: 1729987200000.0,
+  y: 51.5,
+  id: 'Roy Morgan'
+},{
+  x: 1730592000000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1731196800000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+}],
+  name: 'ALP (2PP)',
+  color: '#e53440',
+  marker: {
+  radius: 7,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1655596800000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1660435200000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1661040000000.0,
+  y: 47.3,
+  id: 'Roy Morgan'
+},{
+  x: 1661644800000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1662249600000.0,
+  y: 46.5,
+  id: 'Roy Morgan'
+},{
+  x: 1662854400000.0,
+  y: 46.4,
+  id: 'Roy Morgan'
+},{
+  x: 1663459200000.0,
+  y: 45.3,
+  id: 'Roy Morgan'
+},{
+  x: 1664064000000.0,
+  y: 45.5,
+  id: 'Roy Morgan'
+},{
+  x: 1664668800000.0,
+  y: 45.0,
+  id: 'Roy Morgan'
+},{
+  x: 1665273600000.0,
+  y: 45.1,
+  id: 'Roy Morgan'
+},{
+  x: 1665878400000.0,
+  y: 45.2,
+  id: 'Roy Morgan'
+},{
+  x: 1666483200000.0,
+  y: 45.5,
+  id: 'Roy Morgan'
+},{
+  x: 1667088000000.0,
+  y: 44.4,
+  id: 'Roy Morgan'
+},{
+  x: 1667692800000.0,
+  y: 46.7,
+  id: 'Roy Morgan'
+},{
+  x: 1668297600000.0,
+  y: 46.6,
+  id: 'Roy Morgan'
+},{
+  x: 1668902400000.0,
+  y: 46.6,
+  id: 'Roy Morgan'
+},{
+  x: 1669507200000.0,
+  y: 47.7,
+  id: 'Roy Morgan'
+},{
+  x: 1670112000000.0,
+  y: 45.4,
+  id: 'Roy Morgan'
+},{
+  x: 1670716800000.0,
+  y: 41.5,
+  id: 'Roy Morgan'
+},{
+  x: 1671148800000.0,
+  y: 41.3,
+  id: 'Roy Morgan'
+},{
+  x: 1673136000000.0,
+  y: 41.4,
+  id: 'Roy Morgan'
+},{
+  x: 1673740800000.0,
+  y: 40.6,
+  id: 'Roy Morgan'
+},{
+  x: 1674345600000.0,
+  y: 41.1,
+  id: 'Roy Morgan'
+},{
+  x: 1674950400000.0,
+  y: 43.0,
+  id: 'Roy Morgan'
+},{
+  x: 1675555200000.0,
+  y: 41.6,
+  id: 'Roy Morgan'
+},{
+  x: 1676160000000.0,
+  y: 43.6,
+  id: 'Roy Morgan'
+},{
+  x: 1676764800000.0,
+  y: 41.7,
+  id: 'Roy Morgan'
+},{
+  x: 1677369600000.0,
+  y: 43.5,
+  id: 'Roy Morgan'
+},{
+  x: 1677974400000.0,
+  y: 45.4,
+  id: 'Roy Morgan'
+},{
+  x: 1678579200000.0,
+  y: 43.7,
+  id: 'Roy Morgan'
+},{
+  x: 1679184000000.0,
+  y: 41.9,
+  id: 'Roy Morgan'
+},{
+  x: 1679788800000.0,
+  y: 43.2,
+  id: 'Roy Morgan'
+},{
+  x: 1680393600000.0,
+  y: 45.5,
+  id: 'Roy Morgan'
+},{
+  x: 1680998400000.0,
+  y: 43.8,
+  id: 'Roy Morgan'
+},{
+  x: 1681603200000.0,
+  y: 43.8,
+  id: 'Roy Morgan'
+},{
+  x: 1682208000000.0,
+  y: 43.5,
+  id: 'Roy Morgan'
+},{
+  x: 1682812800000.0,
+  y: 46.4,
+  id: 'Roy Morgan'
+},{
+  x: 1683417600000.0,
+  y: 45.3,
+  id: 'Roy Morgan'
+},{
+  x: 1684022400000.0,
+  y: 41.6,
+  id: 'Roy Morgan'
+},{
+  x: 1684627200000.0,
+  y: 44.7,
+  id: 'Roy Morgan'
+},{
+  x: 1685232000000.0,
+  y: 44.5,
+  id: 'Roy Morgan'
+},{
+  x: 1685836800000.0,
+  y: 44.6,
+  id: 'Roy Morgan'
+},{
+  x: 1686441600000.0,
+  y: 44.2,
+  id: 'Roy Morgan'
+},{
+  x: 1687046400000.0,
+  y: 43.0,
+  id: 'Roy Morgan'
+},{
+  x: 1687651200000.0,
+  y: 43.0,
+  id: 'Roy Morgan'
+},{
+  x: 1688256000000.0,
+  y: 44.0,
+  id: 'Roy Morgan'
+},{
+  x: 1688860800000.0,
+  y: 45.5,
+  id: 'Roy Morgan'
+},{
+  x: 1689465600000.0,
+  y: 47.5,
+  id: 'Roy Morgan'
+},{
+  x: 1690070400000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1690675200000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1691280000000.0,
+  y: 46.5,
+  id: 'Roy Morgan'
+},{
+  x: 1691884800000.0,
+  y: 45.5,
+  id: 'Roy Morgan'
+},{
+  x: 1692489600000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1693094400000.0,
+  y: 46.5,
+  id: 'Roy Morgan'
+},{
+  x: 1693699200000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1694304000000.0,
+  y: 47.5,
+  id: 'Roy Morgan'
+},{
+  x: 1694908800000.0,
+  y: 46.0,
+  id: 'Roy Morgan'
+},{
+  x: 1695513600000.0,
+  y: 46.0,
+  id: 'Roy Morgan'
+},{
+  x: 1696118400000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1696723200000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1697328000000.0,
+  y: 46.0,
+  id: 'Roy Morgan'
+},{
+  x: 1697932800000.0,
+  y: 50.5,
+  id: 'Roy Morgan'
+},{
+  x: 1698537600000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1699142400000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1699747200000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1700352000000.0,
+  y: 50.5,
+  id: 'Roy Morgan'
+},{
+  x: 1700956800000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1701561600000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1702166400000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1702771200000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1704585600000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1705190400000.0,
+  y: 48.5,
+  id: 'Roy Morgan'
+},{
+  x: 1705795200000.0,
+  y: 47.5,
+  id: 'Roy Morgan'
+},{
+  x: 1706400000000.0,
+  y: 49.5,
+  id: 'Roy Morgan'
+},{
+  x: 1707004800000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1708905600000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1709510400000.0,
+  y: 46.5,
+  id: 'Roy Morgan'
+},{
+  x: 1710115200000.0,
+  y: 48.5,
+  id: 'Roy Morgan'
+},{
+  x: 1710720000000.0,
+  y: 48.5,
+  id: 'Roy Morgan'
+},{
+  x: 1711324800000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1711843200000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1712448000000.0,
+  y: 50.5,
+  id: 'Roy Morgan'
+},{
+  x: 1713052800000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1713657600000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1714262400000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1714867200000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1715472000000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1716076800000.0,
+  y: 49.5,
+  id: 'Roy Morgan'
+},{
+  x: 1716681600000.0,
+  y: 51.5,
+  id: 'Roy Morgan'
+},{
+  x: 1717286400000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1717891200000.0,
+  y: 46.5,
+  id: 'Roy Morgan'
+},{
+  x: 1718496000000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1719100800000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1719705600000.0,
+  y: 47.5,
+  id: 'Roy Morgan'
+},{
+  x: 1720310400000.0,
+  y: 50.5,
+  id: 'Roy Morgan'
+},{
+  x: 1720915200000.0,
+  y: 48.5,
+  id: 'Roy Morgan'
+},{
+  x: 1721520000000.0,
+  y: 49.5,
+  id: 'Roy Morgan'
+},{
+  x: 1722124800000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1722729600000.0,
+  y: 48.5,
+  id: 'Roy Morgan'
+},{
+  x: 1723334400000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1723939200000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1724544000000.0,
+  y: 50.0,
+  id: 'Roy Morgan'
+},{
+  x: 1725148800000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1725753600000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1726358400000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1726963200000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1727568000000.0,
+  y: 48.5,
+  id: 'Roy Morgan'
+},{
+  x: 1728172800000.0,
+  y: 48.0,
+  id: 'Roy Morgan'
+},{
+  x: 1728777600000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+},{
+  x: 1729382400000.0,
+  y: 47.0,
+  id: 'Roy Morgan'
+},{
+  x: 1729987200000.0,
+  y: 48.5,
+  id: 'Roy Morgan'
+},{
+  x: 1730592000000.0,
+  y: 51.0,
+  id: 'Roy Morgan'
+},{
+  x: 1731196800000.0,
+  y: 49.0,
+  id: 'Roy Morgan'
+}],
+  name: 'LNP (2PP)',
+  color: '#1c4f9c',
+  marker: {
+  radius: 7,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1659139200000.0,
+  y: 56.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1662163200000.0,
+  y: 57.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1667088000000.0,
+  y: 55.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1670025600000.0,
+  y: 55.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1675468800000.0,
+  y: 55.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1677888000000.0,
+  y: 54.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1680393600000.0,
+  y: 55.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1682208000000.0,
+  y: 56.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1684022400000.0,
+  y: 55.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1685750400000.0,
+  y: 55.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1687564800000.0,
+  y: 54.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1689379200000.0,
+  y: 55.0,
+  id: 'Newspoll YouGov'
+}],
+  name: 'ALP (2PP)',
+  color: '#e53440',
+  marker: {
+  radius: 5,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1659139200000.0,
+  y: 44.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1662163200000.0,
+  y: 43.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1667088000000.0,
+  y: 45.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1670025600000.0,
+  y: 45.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1675468800000.0,
+  y: 45.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1677888000000.0,
+  y: 46.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1680393600000.0,
+  y: 45.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1682208000000.0,
+  y: 44.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1684022400000.0,
+  y: 45.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1685750400000.0,
+  y: 45.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1687564800000.0,
+  y: 46.0,
+  id: 'Newspoll YouGov'
+},{
+  x: 1689379200000.0,
+  y: 45.0,
+  id: 'Newspoll YouGov'
+}],
+  name: 'LNP (2PP)',
+  color: '#1c4f9c',
+  marker: {
+  radius: 5,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1670716800000.0,
+  y: 53.7,
+  id: 'Essential Research'
+},{
+  x: 1674345600000.0,
+  y: 55.8,
+  id: 'Essential Research'
+},{
+  x: 1675641600000.0,
+  y: 57.9,
+  id: 'Essential Research'
+},{
+  x: 1676764800000.0,
+  y: 54.8,
+  id: 'Essential Research'
+},{
+  x: 1677888000000.0,
+  y: 52.7,
+  id: 'Essential Research'
+},{
+  x: 1679270400000.0,
+  y: 54.7,
+  id: 'Essential Research'
+},{
+  x: 1680393600000.0,
+  y: 55.8,
+  id: 'Essential Research'
+},{
+  x: 1681603200000.0,
+  y: 54.7,
+  id: 'Essential Research'
+},{
+  x: 1682812800000.0,
+  y: 56.4,
+  id: 'Essential Research'
+},{
+  x: 1684022400000.0,
+  y: 55.8,
+  id: 'Essential Research'
+},{
+  x: 1685232000000.0,
+  y: 54.7,
+  id: 'Essential Research'
+},{
+  x: 1686441600000.0,
+  y: 55.3,
+  id: 'Essential Research'
+},{
+  x: 1687651200000.0,
+  y: 55.3,
+  id: 'Essential Research'
+},{
+  x: 1688860800000.0,
+  y: 53.7,
+  id: 'Essential Research'
+},{
+  x: 1690070400000.0,
+  y: 52.6,
+  id: 'Essential Research'
+},{
+  x: 1691280000000.0,
+  y: 55.3,
+  id: 'Essential Research'
+},{
+  x: 1692489600000.0,
+  y: 54.3,
+  id: 'Essential Research'
+},{
+  x: 1693699200000.0,
+  y: 54.3,
+  id: 'Essential Research'
+},{
+  x: 1694908800000.0,
+  y: 52.1,
+  id: 'Essential Research'
+},{
+  x: 1696118400000.0,
+  y: 52.6,
+  id: 'Essential Research'
+},{
+  x: 1698537600000.0,
+  y: 51.1,
+  id: 'Essential Research'
+},{
+  x: 1699747200000.0,
+  y: 51.0,
+  id: 'Essential Research'
+},{
+  x: 1700956800000.0,
+  y: 50.5,
+  id: 'Essential Research'
+},{
+  x: 1702166400000.0,
+  y: 51.6,
+  id: 'Essential Research'
+},{
+  x: 1706400000000.0,
+  y: 51.1,
+  id: 'Essential Research'
+},{
+  x: 1707609600000.0,
+  y: 52.1,
+  id: 'Essential Research'
+},{
+  x: 1708905600000.0,
+  y: 49.5,
+  id: 'Essential Research'
+},{
+  x: 1710028800000.0,
+  y: 50.5,
+  id: 'Essential Research'
+},{
+  x: 1711238400000.0,
+  y: 46.8,
+  id: 'Essential Research'
+},{
+  x: 1712448000000.0,
+  y: 51.1,
+  id: 'Essential Research'
+},{
+  x: 1713657600000.0,
+  y: 49.0,
+  id: 'Essential Research'
+},{
+  x: 1714867200000.0,
+  y: 49.5,
+  id: 'Essential Research'
+},{
+  x: 1716076800000.0,
+  y: 49.5,
+  id: 'Essential Research'
+},{
+  x: 1717286400000.0,
+  y: 50.0,
+  id: 'Essential Research'
+},{
+  x: 1718496000000.0,
+  y: 51.1,
+  id: 'Essential Research'
+},{
+  x: 1719705600000.0,
+  y: 49.5,
+  id: 'Essential Research'
+},{
+  x: 1720915200000.0,
+  y: 48.9,
+  id: 'Essential Research'
+},{
+  x: 1722124800000.0,
+  y: 50.5,
+  id: 'Essential Research'
+},{
+  x: 1723334400000.0,
+  y: 50.0,
+  id: 'Essential Research'
+},{
+  x: 1724544000000.0,
+  y: 51.1,
+  id: 'Essential Research'
+},{
+  x: 1725753600000.0,
+  y: 50.0,
+  id: 'Essential Research'
+},{
+  x: 1726963200000.0,
+  y: 49.5,
+  id: 'Essential Research'
+},{
+  x: 1728172800000.0,
+  y: 51.0,
+  id: 'Essential Research'
+},{
+  x: 1729382400000.0,
+  y: 51.1,
+  id: 'Essential Research'
+},{
+  x: 1730592000000.0,
+  y: 49.0,
+  id: 'Essential Research'
+},{
+  x: 1731888000000.0,
+  y: 50.5,
+  id: 'Essential Research'
+}],
+  name: 'ALP (2PP)',
+  color: '#e53440',
+  marker: {
+  radius: 7,
+  symbol: 'circle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1670716800000.0,
+  y: 45.0,
+  id: 'Essential Research'
+},{
+  x: 1674345600000.0,
+  y: 42.9,
+  id: 'Essential Research'
+},{
+  x: 1675641600000.0,
+  y: 40.9,
+  id: 'Essential Research'
+},{
+  x: 1676764800000.0,
+  y: 43.4,
+  id: 'Essential Research'
+},{
+  x: 1677888000000.0,
+  y: 45.5,
+  id: 'Essential Research'
+},{
+  x: 1679270400000.0,
+  y: 44.0,
+  id: 'Essential Research'
+},{
+  x: 1680393600000.0,
+  y: 42.9,
+  id: 'Essential Research'
+},{
+  x: 1681603200000.0,
+  y: 44.0,
+  id: 'Essential Research'
+},{
+  x: 1682812800000.0,
+  y: 42.1,
+  id: 'Essential Research'
+},{
+  x: 1684022400000.0,
+  y: 42.9,
+  id: 'Essential Research'
+},{
+  x: 1685232000000.0,
+  y: 44.0,
+  id: 'Essential Research'
+},{
+  x: 1686441600000.0,
+  y: 43.2,
+  id: 'Essential Research'
+},{
+  x: 1687651200000.0,
+  y: 43.2,
+  id: 'Essential Research'
+},{
+  x: 1688860800000.0,
+  y: 45.0,
+  id: 'Essential Research'
+},{
+  x: 1690070400000.0,
+  y: 46.1,
+  id: 'Essential Research'
+},{
+  x: 1691280000000.0,
+  y: 43.2,
+  id: 'Essential Research'
+},{
+  x: 1692489600000.0,
+  y: 44.2,
+  id: 'Essential Research'
+},{
+  x: 1693699200000.0,
+  y: 44.2,
+  id: 'Essential Research'
+},{
+  x: 1694908800000.0,
+  y: 46.3,
+  id: 'Essential Research'
+},{
+  x: 1696118400000.0,
+  y: 46.1,
+  id: 'Essential Research'
+},{
+  x: 1698537600000.0,
+  y: 47.4,
+  id: 'Essential Research'
+},{
+  x: 1699747200000.0,
+  y: 47.9,
+  id: 'Essential Research'
+},{
+  x: 1700956800000.0,
+  y: 48.2,
+  id: 'Essential Research'
+},{
+  x: 1702166400000.0,
+  y: 47.1,
+  id: 'Essential Research'
+},{
+  x: 1706400000000.0,
+  y: 47.4,
+  id: 'Essential Research'
+},{
+  x: 1707609600000.0,
+  y: 46.9,
+  id: 'Essential Research'
+},{
+  x: 1708905600000.0,
+  y: 49.2,
+  id: 'Essential Research'
+},{
+  x: 1710028800000.0,
+  y: 48.2,
+  id: 'Essential Research'
+},{
+  x: 1711238400000.0,
+  y: 51.6,
+  id: 'Essential Research'
+},{
+  x: 1712448000000.0,
+  y: 47.4,
+  id: 'Essential Research'
+},{
+  x: 1713657600000.0,
+  y: 50.0,
+  id: 'Essential Research'
+},{
+  x: 1714867200000.0,
+  y: 48.7,
+  id: 'Essential Research'
+},{
+  x: 1716076800000.0,
+  y: 48.7,
+  id: 'Essential Research'
+},{
+  x: 1717286400000.0,
+  y: 49.0,
+  id: 'Essential Research'
+},{
+  x: 1718496000000.0,
+  y: 47.4,
+  id: 'Essential Research'
+},{
+  x: 1719705600000.0,
+  y: 48.7,
+  id: 'Essential Research'
+},{
+  x: 1720915200000.0,
+  y: 49.5,
+  id: 'Essential Research'
+},{
+  x: 1722124800000.0,
+  y: 47.6,
+  id: 'Essential Research'
+},{
+  x: 1723334400000.0,
+  y: 48.5,
+  id: 'Essential Research'
+},{
+  x: 1724544000000.0,
+  y: 47.4,
+  id: 'Essential Research'
+},{
+  x: 1725753600000.0,
+  y: 49.0,
+  id: 'Essential Research'
+},{
+  x: 1726963200000.0,
+  y: 49.2,
+  id: 'Essential Research'
+},{
+  x: 1728172800000.0,
+  y: 47.9,
+  id: 'Essential Research'
+},{
+  x: 1729382400000.0,
+  y: 47.4,
+  id: 'Essential Research'
+},{
+  x: 1730592000000.0,
+  y: 50.0,
+  id: 'Essential Research'
+},{
+  x: 1731888000000.0,
+  y: 48.2,
+  id: 'Essential Research'
+}],
+  name: 'LNP (2PP)',
+  color: '#1c4f9c',
+  marker: {
+  radius: 7,
+  symbol: 'circle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1671321600000.0,
+  y: 54.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1684281600000.0,
+  y: 52.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1695513600000.0,
+  y: 51.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1702771200000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1704931200000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1708214400000.0,
+  y: 51.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1710115200000.0,
+  y: 51.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1713052800000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1716076800000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1718496000000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1721347200000.0,
+  y: 49.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1724025600000.0,
+  y: 49.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1726358400000.0,
+  y: 48.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1729382400000.0,
+  y: 49.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1731801600000.0,
+  y: 49.0,
+  id: 'Freshwater Strategy'
+}],
+  name: 'ALP (2PP)',
+  color: '#e53440',
+  marker: {
+  radius: 5,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1671321600000.0,
+  y: 46.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1684281600000.0,
+  y: 48.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1695513600000.0,
+  y: 49.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1702771200000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1704931200000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1708214400000.0,
+  y: 49.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1710115200000.0,
+  y: 49.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1713052800000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1716076800000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1718496000000.0,
+  y: 50.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1721347200000.0,
+  y: 51.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1724025600000.0,
+  y: 51.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1726358400000.0,
+  y: 52.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1729382400000.0,
+  y: 51.0,
+  id: 'Freshwater Strategy'
+},{
+  x: 1731801600000.0,
+  y: 51.0,
+  id: 'Freshwater Strategy'
+}],
+  name: 'LNP (2PP)',
+  color: '#1c4f9c',
+  marker: {
+  radius: 5,
+  symbol: 'square'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1691971200000.0,
+  y: 55.6,
+  id: 'RedBridge Group'
+},{
+  x: 1693785600000.0,
+  y: 54.1,
+  id: 'RedBridge Group'
+},{
+  x: 1698883200000.0,
+  y: 53.5,
+  id: 'RedBridge Group'
+},{
+  x: 1702166400000.0,
+  y: 52.8,
+  id: 'RedBridge Group'
+},{
+  x: 1707264000000.0,
+  y: 51.2,
+  id: 'RedBridge Group'
+},{
+  x: 1714089600000.0,
+  y: 52.0,
+  id: 'RedBridge Group'
+},{
+  x: 1721347200000.0,
+  y: 48.5,
+  id: 'RedBridge Group'
+},{
+  x: 1724716800000.0,
+  y: 50.5,
+  id: 'RedBridge Group'
+}],
+  name: 'ALP (2PP)',
+  color: '#e53440',
+  marker: {
+  radius: 5,
+  symbol: 'triangle-down'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1691971200000.0,
+  y: 44.4,
+  id: 'RedBridge Group'
+},{
+  x: 1693785600000.0,
+  y: 45.9,
+  id: 'RedBridge Group'
+},{
+  x: 1698883200000.0,
+  y: 46.5,
+  id: 'RedBridge Group'
+},{
+  x: 1702166400000.0,
+  y: 47.2,
+  id: 'RedBridge Group'
+},{
+  x: 1707264000000.0,
+  y: 48.8,
+  id: 'RedBridge Group'
+},{
+  x: 1714089600000.0,
+  y: 48.0,
+  id: 'RedBridge Group'
+},{
+  x: 1721347200000.0,
+  y: 51.5,
+  id: 'RedBridge Group'
+},{
+  x: 1724716800000.0,
+  y: 49.5,
+  id: 'RedBridge Group'
+}],
+  name: 'LNP (2PP)',
+  color: '#1c4f9c',
+  marker: {
+  radius: 5,
+  symbol: 'triangle-down'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1693526400000.0,
+  y: 53.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1695340800000.0,
+  y: 54.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1696550400000.0,
+  y: 53.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1697068800000.0,
+  y: 54.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1698883200000.0,
+  y: 52.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1700697600000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1702598400000.0,
+  y: 52.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1706918400000.0,
+  y: 52.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1708646400000.0,
+  y: 52.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1711152000000.0,
+  y: 51.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1713398400000.0,
+  y: 51.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1715990400000.0,
+  y: 52.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1717718400000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1719532800000.0,
+  y: 51.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1721347200000.0,
+  y: 51.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1723161600000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1724976000000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1726790400000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1728604800000.0,
+  y: 49.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1731024000000.0,
+  y: 49.0,
+  id: 'Newspoll Pyxis'
+}],
+  name: 'ALP (2PP)',
+  color: '#e53440',
+  marker: {
+  radius: 5,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1693526400000.0,
+  y: 47.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1695340800000.0,
+  y: 46.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1696550400000.0,
+  y: 47.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1697068800000.0,
+  y: 46.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1698883200000.0,
+  y: 48.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1700697600000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1702598400000.0,
+  y: 48.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1706918400000.0,
+  y: 48.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1708646400000.0,
+  y: 48.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1711152000000.0,
+  y: 49.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1713398400000.0,
+  y: 49.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1715990400000.0,
+  y: 48.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1717718400000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1719532800000.0,
+  y: 49.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1721347200000.0,
+  y: 49.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1723161600000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1724976000000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1726790400000.0,
+  y: 50.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1728604800000.0,
+  y: 51.0,
+  id: 'Newspoll Pyxis'
+},{
+  x: 1731024000000.0,
+  y: 51.0,
+  id: 'Newspoll Pyxis'
+}],
+  name: 'LNP (2PP)',
+  color: '#1c4f9c',
+  marker: {
+  radius: 5,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1695945600000.0,
+  y: 53.0,
+  id: 'YouGov'
+},{
+  x: 1696896000000.0,
+  y: 53.0,
+  id: 'YouGov'
+},{
+  x: 1699920000000.0,
+  y: 51.0,
+  id: 'YouGov'
+},{
+  x: 1701734400000.0,
+  y: 51.0,
+  id: 'YouGov'
+},{
+  x: 1705449600000.0,
+  y: 52.0,
+  id: 'YouGov'
+},{
+  x: 1707264000000.0,
+  y: 52.0,
+  id: 'YouGov'
+},{
+  x: 1709683200000.0,
+  y: 52.0,
+  id: 'YouGov'
+},{
+  x: 1711497600000.0,
+  y: 51.0,
+  id: 'YouGov'
+},{
+  x: 1713830400000.0,
+  y: 52.0,
+  id: 'YouGov'
+},{
+  x: 1715644800000.0,
+  y: 50.0,
+  id: 'YouGov'
+},{
+  x: 1717459200000.0,
+  y: 50.0,
+  id: 'YouGov'
+},{
+  x: 1721692800000.0,
+  y: 51.0,
+  id: 'YouGov'
+},{
+  x: 1724803200000.0,
+  y: 50.0,
+  id: 'YouGov'
+},{
+  x: 1726704000000.0,
+  y: 50.0,
+  id: 'YouGov'
+}],
+  name: 'ALP (2PP)',
+  color: '#e53440',
+  marker: {
+  radius: 7,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1695945600000.0,
+  y: 47.0,
+  id: 'YouGov'
+},{
+  x: 1696896000000.0,
+  y: 47.0,
+  id: 'YouGov'
+},{
+  x: 1699920000000.0,
+  y: 49.0,
+  id: 'YouGov'
+},{
+  x: 1701734400000.0,
+  y: 49.0,
+  id: 'YouGov'
+},{
+  x: 1705449600000.0,
+  y: 48.0,
+  id: 'YouGov'
+},{
+  x: 1707264000000.0,
+  y: 48.0,
+  id: 'YouGov'
+},{
+  x: 1709683200000.0,
+  y: 48.0,
+  id: 'YouGov'
+},{
+  x: 1711497600000.0,
+  y: 49.0,
+  id: 'YouGov'
+},{
+  x: 1713830400000.0,
+  y: 48.0,
+  id: 'YouGov'
+},{
+  x: 1715644800000.0,
+  y: 50.0,
+  id: 'YouGov'
+},{
+  x: 1717459200000.0,
+  y: 50.0,
+  id: 'YouGov'
+},{
+  x: 1721692800000.0,
+  y: 49.0,
+  id: 'YouGov'
+},{
+  x: 1724803200000.0,
+  y: 50.0,
+  id: 'YouGov'
+},{
+  x: 1726704000000.0,
+  y: 50.0,
+  id: 'YouGov'
+}],
+  name: 'LNP (2PP)',
+  color: '#1c4f9c',
+  marker: {
+  radius: 7,
+  symbol: 'triangle'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1724889600000.0,
+  y: 51.0,
+  id: 'Wolf & Smith'
+}],
+  name: 'ALP (2PP)',
+  color: '#e53440',
+  marker: {
+  radius: 7,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [{
+  x: 1724889600000.0,
+  y: 49.0,
+  id: 'Wolf & Smith'
+}],
+  name: 'LNP (2PP)',
+  color: '#1c4f9c',
+  marker: {
+  radius: 7,
+  symbol: 'diamond'
+},
+  opacity: 0.5,
+  type: 'scatter'
+},
+{
+  data: [[1653091200000,
+52.1],
+[1653436800000,
+52.18],
+[1653782400000,
+52.26],
+[1654128000000,
+52.35],
+[1654473600000,
+52.42],
+[1654819200000,
+52.5],
+[1655164800000,
+52.57],
+[1655510400000,
+52.65],
+[1655856000000,
+52.74],
+[1656201600000,
+52.82],
+[1656547200000,
+52.91],
+[1656892800000,
+53.0],
+[1657238400000,
+53.09],
+[1657584000000,
+53.17],
+[1657929600000,
+53.26],
+[1658275200000,
+53.34],
+[1658620800000,
+53.43],
+[1658966400000,
+53.52],
+[1659312000000,
+53.5],
+[1659657600000,
+53.46],
+[1660003200000,
+53.43],
+[1660348800000,
+53.4],
+[1660694400000,
+53.41],
+[1661040000000,
+53.42],
+[1661385600000,
+53.49],
+[1661731200000,
+53.6],
+[1662076800000,
+53.76],
+[1662422400000,
+53.79],
+[1662768000000,
+53.83],
+[1663113600000,
+53.9],
+[1663459200000,
+53.97],
+[1663804800000,
+54.02],
+[1664150400000,
+54.07],
+[1664496000000,
+54.12],
+[1664841600000,
+54.16],
+[1665187200000,
+54.19],
+[1665532800000,
+54.21],
+[1665878400000,
+54.23],
+[1666224000000,
+54.23],
+[1666569600000,
+54.25],
+[1666915200000,
+54.27],
+[1667260800000,
+54.23],
+[1667606400000,
+54.17],
+[1667952000000,
+54.19],
+[1668297600000,
+54.21],
+[1668643200000,
+54.28],
+[1668988800000,
+54.38],
+[1669334400000,
+54.52],
+[1669680000000,
+54.76],
+[1670025600000,
+55.04],
+[1670371200000,
+55.36],
+[1670716800000,
+55.67],
+[1671062400000,
+55.92],
+[1671408000000,
+56.06],
+[1671753600000,
+56.21],
+[1672099200000,
+56.36],
+[1672444800000,
+56.52],
+[1672790400000,
+56.68],
+[1673136000000,
+56.82],
+[1673481600000,
+56.9],
+[1673827200000,
+56.93],
+[1674172800000,
+56.89],
+[1674518400000,
+56.8],
+[1674864000000,
+56.71],
+[1675209600000,
+56.63],
+[1675555200000,
+56.58],
+[1675900800000,
+56.44],
+[1676246400000,
+56.31],
+[1676592000000,
+56.2],
+[1676937600000,
+56.04],
+[1677283200000,
+55.85],
+[1677628800000,
+55.65],
+[1677974400000,
+55.56],
+[1678320000000,
+55.63],
+[1678665600000,
+55.68],
+[1679011200000,
+55.73],
+[1679356800000,
+55.7],
+[1679702400000,
+55.67],
+[1680048000000,
+55.59],
+[1680393600000,
+55.52],
+[1680739200000,
+55.53],
+[1681084800000,
+55.53],
+[1681430400000,
+55.51],
+[1681776000000,
+55.49],
+[1682121600000,
+55.47],
+[1682467200000,
+55.4],
+[1682812800000,
+55.34],
+[1683158400000,
+55.32],
+[1683504000000,
+55.33],
+[1683849600000,
+55.36],
+[1684195200000,
+55.27],
+[1684540800000,
+55.23],
+[1684886400000,
+55.19],
+[1685232000000,
+55.16],
+[1685577600000,
+55.14],
+[1685923200000,
+55.13],
+[1686268800000,
+55.14],
+[1686614400000,
+55.1],
+[1686960000000,
+55.06],
+[1687305600000,
+54.94],
+[1687651200000,
+54.83],
+[1687996800000,
+54.68],
+[1688342400000,
+54.49],
+[1688688000000,
+54.28],
+[1689033600000,
+54.09],
+[1689379200000,
+53.88],
+[1689724800000,
+53.74],
+[1690070400000,
+53.63],
+[1690416000000,
+53.61],
+[1690761600000,
+53.62],
+[1691107200000,
+53.67],
+[1691452800000,
+53.67],
+[1691798400000,
+53.65],
+[1692144000000,
+53.57],
+[1692489600000,
+53.48],
+[1692835200000,
+53.39],
+[1693180800000,
+53.3],
+[1693526400000,
+53.23],
+[1693872000000,
+53.15],
+[1694217600000,
+53.04],
+[1694563200000,
+52.99],
+[1694908800000,
+52.94],
+[1695254400000,
+52.89],
+[1695600000000,
+52.79],
+[1695945600000,
+52.69],
+[1696291200000,
+52.62],
+[1696636800000,
+52.56],
+[1696982400000,
+52.48],
+[1697328000000,
+52.28],
+[1697673600000,
+52.02],
+[1698019200000,
+51.85],
+[1698364800000,
+51.74],
+[1698710400000,
+51.61],
+[1699056000000,
+51.44],
+[1699401600000,
+51.24],
+[1699747200000,
+51.07],
+[1700092800000,
+50.97],
+[1700438400000,
+50.92],
+[1700784000000,
+50.95],
+[1701129600000,
+50.95],
+[1701475200000,
+50.95],
+[1701820800000,
+50.97],
+[1702166400000,
+50.97],
+[1702512000000,
+50.91],
+[1702857600000,
+50.85],
+[1703203200000,
+50.83],
+[1703548800000,
+50.81],
+[1703894400000,
+50.79],
+[1704240000000,
+50.76],
+[1704585600000,
+50.78],
+[1704931200000,
+50.89],
+[1705276800000,
+51.0],
+[1705622400000,
+51.09],
+[1705968000000,
+51.12],
+[1706313600000,
+51.13],
+[1706659200000,
+51.21],
+[1707004800000,
+51.25],
+[1707350400000,
+51.24],
+[1707696000000,
+51.23],
+[1708041600000,
+51.18],
+[1708387200000,
+51.12],
+[1708732800000,
+51.02],
+[1709078400000,
+51.04],
+[1709424000000,
+51.09],
+[1709769600000,
+51.0],
+[1710115200000,
+50.88],
+[1710460800000,
+50.73],
+[1710806400000,
+50.57],
+[1711152000000,
+50.4],
+[1711497600000,
+50.39],
+[1711843200000,
+50.38],
+[1712188800000,
+50.37],
+[1712534400000,
+50.38],
+[1712880000000,
+50.4],
+[1713225600000,
+50.5],
+[1713571200000,
+50.6],
+[1713916800000,
+50.69],
+[1714262400000,
+50.71],
+[1714608000000,
+50.69],
+[1714953600000,
+50.66],
+[1715299200000,
+50.62],
+[1715644800000,
+50.56],
+[1715990400000,
+50.5],
+[1716336000000,
+50.43],
+[1716681600000,
+50.4],
+[1717027200000,
+50.47],
+[1717372800000,
+50.51],
+[1717718400000,
+50.59],
+[1718064000000,
+50.59],
+[1718409600000,
+50.56],
+[1718755200000,
+50.54],
+[1719100800000,
+50.51],
+[1719446400000,
+50.48],
+[1719792000000,
+50.41],
+[1720137600000,
+50.3],
+[1720483200000,
+50.25],
+[1720828800000,
+50.22],
+[1721174400000,
+50.18],
+[1721520000000,
+50.22],
+[1721865600000,
+50.29],
+[1722211200000,
+50.32],
+[1722556800000,
+50.35],
+[1722902400000,
+50.33],
+[1723248000000,
+50.32],
+[1723593600000,
+50.31],
+[1723939200000,
+50.31],
+[1724284800000,
+50.29],
+[1724630400000,
+50.28],
+[1724976000000,
+50.33],
+[1725321600000,
+50.39],
+[1725667200000,
+50.44],
+[1726012800000,
+50.44],
+[1726358400000,
+50.43],
+[1726704000000,
+50.43],
+[1727049600000,
+50.49],
+[1727395200000,
+50.55],
+[1727740800000,
+50.57],
+[1728086400000,
+50.59],
+[1728432000000,
+50.53],
+[1728777600000,
+50.52],
+[1729123200000,
+50.54],
+[1729468800000,
+50.49],
+[1729814400000,
+50.37],
+[1730160000000,
+50.22],
+[1730505600000,
+50.06],
+[1730851200000,
+50.04],
+[1731196800000,
+50.07],
+[1731542400000,
+50.1],
+[1731888000000,
+50.12],
+[1732233600000,
+50.13],
+[1732579200000,
+50.13]],
+  id: 'ALP (2PP) Voting Intention',
+  name: 'ALP (2PP)',
+  color: '#e53440',
+  type: 'line'
+},
+{
+  data: [[1653091200000,
+47.9],
+[1653436800000,
+47.83],
+[1653782400000,
+47.76],
+[1654128000000,
+47.68],
+[1654473600000,
+47.61],
+[1654819200000,
+47.54],
+[1655164800000,
+47.48],
+[1655510400000,
+47.41],
+[1655856000000,
+47.32],
+[1656201600000,
+47.25],
+[1656547200000,
+47.17],
+[1656892800000,
+47.09],
+[1657238400000,
+47.01],
+[1657584000000,
+46.94],
+[1657929600000,
+46.86],
+[1658275200000,
+46.78],
+[1658620800000,
+46.7],
+[1658966400000,
+46.63],
+[1659312000000,
+46.64],
+[1659657600000,
+46.67],
+[1660003200000,
+46.7],
+[1660348800000,
+46.72],
+[1660694400000,
+46.72],
+[1661040000000,
+46.7],
+[1661385600000,
+46.64],
+[1661731200000,
+46.54],
+[1662076800000,
+46.39],
+[1662422400000,
+46.37],
+[1662768000000,
+46.33],
+[1663113600000,
+46.27],
+[1663459200000,
+46.21],
+[1663804800000,
+46.16],
+[1664150400000,
+46.12],
+[1664496000000,
+46.07],
+[1664841600000,
+46.03],
+[1665187200000,
+46.01],
+[1665532800000,
+45.99],
+[1665878400000,
+45.97],
+[1666224000000,
+45.96],
+[1666569600000,
+45.95],
+[1666915200000,
+45.93],
+[1667260800000,
+45.97],
+[1667606400000,
+46.02],
+[1667952000000,
+46.0],
+[1668297600000,
+45.98],
+[1668643200000,
+45.92],
+[1668988800000,
+45.83],
+[1669334400000,
+45.7],
+[1669680000000,
+45.49],
+[1670025600000,
+45.24],
+[1670371200000,
+44.95],
+[1670716800000,
+44.68],
+[1671062400000,
+44.45],
+[1671408000000,
+44.33],
+[1671753600000,
+44.19],
+[1672099200000,
+44.06],
+[1672444800000,
+43.92],
+[1672790400000,
+43.77],
+[1673136000000,
+43.65],
+[1673481600000,
+43.57],
+[1673827200000,
+43.55],
+[1674172800000,
+43.59],
+[1674518400000,
+43.66],
+[1674864000000,
+43.74],
+[1675209600000,
+43.82],
+[1675555200000,
+43.87],
+[1675900800000,
+43.99],
+[1676246400000,
+44.1],
+[1676592000000,
+44.2],
+[1676937600000,
+44.34],
+[1677283200000,
+44.51],
+[1677628800000,
+44.69],
+[1677974400000,
+44.77],
+[1678320000000,
+44.71],
+[1678665600000,
+44.66],
+[1679011200000,
+44.62],
+[1679356800000,
+44.65],
+[1679702400000,
+44.68],
+[1680048000000,
+44.75],
+[1680393600000,
+44.81],
+[1680739200000,
+44.8],
+[1681084800000,
+44.81],
+[1681430400000,
+44.82],
+[1681776000000,
+44.84],
+[1682121600000,
+44.86],
+[1682467200000,
+44.92],
+[1682812800000,
+44.98],
+[1683158400000,
+45.0],
+[1683504000000,
+44.99],
+[1683849600000,
+44.97],
+[1684195200000,
+45.05],
+[1684540800000,
+45.09],
+[1684886400000,
+45.12],
+[1685232000000,
+45.15],
+[1685577600000,
+45.17],
+[1685923200000,
+45.18],
+[1686268800000,
+45.18],
+[1686614400000,
+45.21],
+[1686960000000,
+45.25],
+[1687305600000,
+45.36],
+[1687651200000,
+45.46],
+[1687996800000,
+45.59],
+[1688342400000,
+45.77],
+[1688688000000,
+45.95],
+[1689033600000,
+46.13],
+[1689379200000,
+46.31],
+[1689724800000,
+46.44],
+[1690070400000,
+46.55],
+[1690416000000,
+46.56],
+[1690761600000,
+46.56],
+[1691107200000,
+46.52],
+[1691452800000,
+46.52],
+[1691798400000,
+46.54],
+[1692144000000,
+46.61],
+[1692489600000,
+46.7],
+[1692835200000,
+46.78],
+[1693180800000,
+46.86],
+[1693526400000,
+46.92],
+[1693872000000,
+47.0],
+[1694217600000,
+47.1],
+[1694563200000,
+47.14],
+[1694908800000,
+47.19],
+[1695254400000,
+47.25],
+[1695600000000,
+47.33],
+[1695945600000,
+47.42],
+[1696291200000,
+47.49],
+[1696636800000,
+47.55],
+[1696982400000,
+47.62],
+[1697328000000,
+47.81],
+[1697673600000,
+48.04],
+[1698019200000,
+48.19],
+[1698364800000,
+48.3],
+[1698710400000,
+48.41],
+[1699056000000,
+48.57],
+[1699401600000,
+48.75],
+[1699747200000,
+48.91],
+[1700092800000,
+49.0],
+[1700438400000,
+49.04],
+[1700784000000,
+49.02],
+[1701129600000,
+49.02],
+[1701475200000,
+49.03],
+[1701820800000,
+49.01],
+[1702166400000,
+49.01],
+[1702512000000,
+49.07],
+[1702857600000,
+49.12],
+[1703203200000,
+49.14],
+[1703548800000,
+49.16],
+[1703894400000,
+49.18],
+[1704240000000,
+49.21],
+[1704585600000,
+49.19],
+[1704931200000,
+49.09],
+[1705276800000,
+48.99],
+[1705622400000,
+48.92],
+[1705968000000,
+48.9],
+[1706313600000,
+48.88],
+[1706659200000,
+48.82],
+[1707004800000,
+48.78],
+[1707350400000,
+48.79],
+[1707696000000,
+48.81],
+[1708041600000,
+48.85],
+[1708387200000,
+48.91],
+[1708732800000,
+48.99],
+[1709078400000,
+48.98],
+[1709424000000,
+48.94],
+[1709769600000,
+49.02],
+[1710115200000,
+49.13],
+[1710460800000,
+49.26],
+[1710806400000,
+49.41],
+[1711152000000,
+49.56],
+[1711497600000,
+49.57],
+[1711843200000,
+49.58],
+[1712188800000,
+49.59],
+[1712534400000,
+49.59],
+[1712880000000,
+49.56],
+[1713225600000,
+49.48],
+[1713571200000,
+49.39],
+[1713916800000,
+49.31],
+[1714262400000,
+49.29],
+[1714608000000,
+49.31],
+[1714953600000,
+49.34],
+[1715299200000,
+49.38],
+[1715644800000,
+49.44],
+[1715990400000,
+49.49],
+[1716336000000,
+49.55],
+[1716681600000,
+49.58],
+[1717027200000,
+49.52],
+[1717372800000,
+49.48],
+[1717718400000,
+49.41],
+[1718064000000,
+49.41],
+[1718409600000,
+49.44],
+[1718755200000,
+49.47],
+[1719100800000,
+49.49],
+[1719446400000,
+49.51],
+[1719792000000,
+49.58],
+[1720137600000,
+49.67],
+[1720483200000,
+49.72],
+[1720828800000,
+49.75],
+[1721174400000,
+49.79],
+[1721520000000,
+49.75],
+[1721865600000,
+49.69],
+[1722211200000,
+49.66],
+[1722556800000,
+49.64],
+[1722902400000,
+49.66],
+[1723248000000,
+49.67],
+[1723593600000,
+49.67],
+[1723939200000,
+49.68],
+[1724284800000,
+49.69],
+[1724630400000,
+49.7],
+[1724976000000,
+49.65],
+[1725321600000,
+49.61],
+[1725667200000,
+49.56],
+[1726012800000,
+49.57],
+[1726358400000,
+49.58],
+[1726704000000,
+49.57],
+[1727049600000,
+49.52],
+[1727395200000,
+49.47],
+[1727740800000,
+49.45],
+[1728086400000,
+49.43],
+[1728432000000,
+49.49],
+[1728777600000,
+49.5],
+[1729123200000,
+49.48],
+[1729468800000,
+49.53],
+[1729814400000,
+49.63],
+[1730160000000,
+49.76],
+[1730505600000,
+49.91],
+[1730851200000,
+49.93],
+[1731196800000,
+49.9],
+[1731542400000,
+49.87],
+[1731888000000,
+49.85],
+[1732233600000,
+49.85],
+[1732579200000,
+49.85]],
+  id: 'LNP (2PP) Voting Intention',
+  name: 'LNP (2PP)',
+  color: '#1c4f9c',
+  type: 'line'
+}],
+  subtitle: {
+  align: 'left',
+  text: 'Source: Poll data aggregated from <a href="https://www.pollbludger.net/fed2025/bludgertrack/polldata.htm?">PollBludger.net</a>, media reports and other sources'
+},
+  title: {
+  align: 'left',
+  text: 'Two Party Preferred Voting Intention over time'
+},
+  xAxis: {
+  endOnTick: true,
+  showLastLabel: true,
+  startOnTick: true,
+  tickLength: 0,
+  title: {
+  text: 'Date'
+},
+  type: 'datetime'
+},
+  yAxis: {
+  endOnTick: true,
+  gridLineWidth: 0,
+  labels: {
+  format: '{value} %'
+},
+  showLastLabel: true,
+  startOnTick: true,
+  tickLength: 0,
+  title: {
+  text: 'Voting Intention'
+}
+}
+},
+);
+});
+
+        </script>
+        </div>
+    </body>
+
+    </html>
+    

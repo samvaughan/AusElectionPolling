@@ -4,14 +4,17 @@ import pandas as pd
 from pathlib import Path
 import datetime
 from src.scripts import utils
+import src.scripts.file_paths as fp
 
 
-first_pref_or_2pp = "first_preference"
+first_pref_or_2pp = "2pp"
 
 if first_pref_or_2pp == "first_preference":
     party_columns = ["ALP", "LNP", "GRN"]
+    title = "First Preference Voting Intention"
 elif first_pref_or_2pp == "2pp":
-    party_columns = ["ALP_2pp", "LNP_2pp"]
+    party_columns = ["ALP_2pp_NAT", "LNP_2pp_NAT"]
+    title = "Two Party Preferred Voting Intention"
 else:
     raise NameError("Must be one of 'first_preference' or '2pp'")
 
@@ -20,7 +23,7 @@ date = datetime.datetime.today().strftime("%Y%m%d")
 
 # Filenames
 netcdf_filename, model_data_filename, model_df_filename, election_data_filename = (
-    utils.get_filenames(date, first_pref_or_2pp)
+    fp.get_filenames(date, first_pref_or_2pp)
 )
 print(f"Using model fit {netcdf_filename}...")
 

@@ -12,6 +12,21 @@ three_party_voteshare_data = Path(
     correlations_processed / "National_State_correlations_ALP_LNP_GRN.csv"
 )
 
+## HTML
+html_filename_time_first_preference = Path("src/results/html/polls_over_time_fp.html")
+html_filename_time_2pp = Path("src/results/html/polls_over_time_2pp.html")
+
+html_filename_election_tomorrow_first_preference = Path(
+    "src/results/html/election_held_tomorrow_fp.html"
+)
+html_filename_election_tomorrow_2pp = Path(
+    "src/results/html/election_held_tomorrow_2pp.html"
+)
+## Shared JS
+highcharts_shared_options = Path("src/scripts/JS/template_shared_options.js")
+polls_over_time_options = Path("src/scripts/JS/time_plot_options.js")
+election_held_today_options = Path("src/scripts/JS/election_held_today_options.js")
+
 
 def get_filenames(date, first_pref_or_2pp):
 

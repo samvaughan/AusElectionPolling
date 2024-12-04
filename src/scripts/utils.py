@@ -8,30 +8,50 @@ import pandas as pd
 import src.scripts.file_paths as fp
 
 
-def get_pollster_markers():
+def get_pollster_markers(backend="matplotlib"):
 
-    marker_dict = {
-        "Essential_Research": "o",
-        "Freshwater_Strategy": "s",
-        "Newspoll_Pyxis": "D",
-        "Newspoll_YouGov": "^",
-        "RedBridge_Group": "v",
-        "Resolve_Strategic": "P",
-        "Roy_Morgan": "X",
-        "Wolf_&_Smith": "*",
-        "YouGov": "H",
-    }
+    if backend == "matplotlib":
+        marker_dict = {
+            "Essential_Research": "o",
+            "Freshwater_Strategy": "s",
+            "Newspoll_Pyxis": "D",
+            "Newspoll_YouGov": "^",
+            "RedBridge_Group": "v",
+            "Resolve_Strategic": "P",
+            "Roy_Morgan": "X",
+            "Wolf_&_Smith": "*",
+            "YouGov": "H",
+        }
+    elif backend == "HighCharts":
+        marker_dict = {
+            "Essential_Research": dict(marker="circle", size=7),
+            "Freshwater_Strategy": dict(marker="square", size=5),
+            "Newspoll_Pyxis": dict(marker="diamond", size=5),
+            "Newspoll_YouGov": dict(marker="triangle", size=5),
+            "RedBridge_Group": dict(marker="triangle-down", size=5),
+            "Resolve_Strategic": dict(marker="circle", size=5),
+            "Roy_Morgan": dict(marker="square", size=7),
+            "Wolf_&_Smith": dict(marker="diamond", size=7),
+            "YouGov": dict(marker="triangle", size=7),
+        }
+    else:
+        raise NameError("Backend type not understood")
     return marker_dict
 
 
 def get_correlation_matrix(unique_parameters):
 
-    vote_shares = pd.read_csv(
-        fp.three_party_voteshare_data, index_col="UniqueIdentifier"
-    ).drop(["PartyAb", "StateAb", "DivisionNm"], axis=1)
-    vote_shares = vote_shares.loc[unique_parameters]
+    if (len(unique_parameters) == 2) & ("ALP_2pp_NAT" in unique_parameters):
+        correlation_matrix = pd.DataFrame(
+            dict(ALP_2pp=[1, -1], LNP_2pp=[-1, 1]), index=["ALP_2pp", "LNP_2pp"]
+        )
+    else:
+        vote_shares = pd.read_csv(
+            fp.three_party_voteshare_data, index_col="UniqueIdentifier"
+        ).drop(["PartyAb", "StateAb", "DivisionNm"], axis=1)
+        vote_shares = vote_shares.loc[unique_parameters]
 
-    correlation_matrix = vote_shares.T.corr()
+        correlation_matrix = vote_shares.T.corr()
 
     return correlation_matrix
 
@@ -70,7 +90,7 @@ def make_data_for_fitting(df, party_columns, states, prediction_date):
     df["PartyIndex"] = df["Party_Scope"].cat.codes + 1
 
     # Strip off the election values
-    election_data = df.loc[df.PollName == "Election"]
+    election_data = df.loc[df.PollName == "Election"].sort_values("PartyIndex")
     df = df.drop(election_data.index)
 
     ## Time based manipulations
@@ -100,22 +120,20 @@ def make_data_for_fitting(df, party_columns, states, prediction_date):
     df["PollVariance"] = r * (1 - r) / df["Sample"].values
 
     # And the Cholesky decomposition of the covariance matrix
-
-    # Get the appropriate correlation matrix
-    # Remove the LNP in Queensland
-    # correlation_matrix = np.array(
-    #     [
-    #         [1.0, 0.67420595, -0.50838762],
-    #         [0.67420595, 1.0, -0.89800079],
-    #         [-0.50838762, -0.89800079, 1.0],
-    #     ]
-    # )
     correlation_matrix = get_correlation_matrix(unique_parameters).values
+
+    # Add a tiny number to the diagonals to deal with machine precision issues
+    eps = 1e-12
+    positive_offset = np.eye(N_parties) * eps
+    correlation_matrix = correlation_matrix + positive_offset
     cholesky_matrix_loc = np.linalg.cholesky(correlation_matrix)
-    cholesky_matrix_uncertainty = np.full((N_parties, N_parties), 0.1)
+    cholesky_matrix_uncertainty = np.full((N_parties, N_parties), 0.01)
 
     # cholesky_matrix = np.linalg.cholesky(correlation_matrix)
     df = df.sort_values("N_Days")
+
+    # And finally drop polls with NaN values
+    df = df.dropna(subset="PollResult")
 
     # Now lay out all of the data
     data = dict(
@@ -131,7 +149,6 @@ def make_data_for_fitting(df, party_columns, states, prediction_date):
         poll_result=df["PollResult"] / 100,
         election_result=election_data.PollResult.values / 100,
         election_result_index=election_data.PartyIndex.values,
-        additional_variance=0.001,
         inflator=np.sqrt(2),
         correlation_matrix=correlation_matrix,
         cholesky_matrix_loc=cholesky_matrix_loc,
@@ -139,6 +156,55 @@ def make_data_for_fitting(df, party_columns, states, prediction_date):
     )
 
     return data, df, election_data, unique_parameters
+
+
+# HTML
+
+
+def make_html(js_code, js_settings, height=600):
+
+    html_page = f"""
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+        <link type="text/css" rel="stylesheet" href="TASK3.css" media="all" />
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script language="javascript" type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
+
+    <body>
+
+        <div id="container" style="min-width: 310px; max-width: 1200px; height: {height}px; margin: 0 auto">
+
+        <script type="text/javascript">
+
+        {js_settings}
+        Highcharts.SVGRenderer.prototype.symbols.cross = function (x, y, w, h) {{
+                return ['M', x, y, 'L', x + w, y + h, 'M', x + w, y, 'L', x, y + h, 'z'];
+            }};
+            if (Highcharts.VMLRenderer) {{
+                Highcharts.VMLRenderer.prototype.symbols.cross = Highcharts.SVGRenderer.prototype.symbols.cross;
+            }}
+        Highcharts.SVGRenderer.prototype.symbols.plus = function (x, y, w, h) {{
+                return ['M', x, y + h/2, 'L', x + w, y+h/2, 'M', x + w/2, y, 'L', x+w/2, y + h, 'z'];
+            }};
+            if (Highcharts.VMLRenderer) {{
+                Highcharts.VMLRenderer.prototype.symbols.cross = Highcharts.SVGRenderer.prototype.symbols.cross;
+            }}
+
+        {js_code}
+
+        </script>
+        </div>
+    </body>
+
+    </html>
+    """
+
+    return html_page
 
 
 # Plotting
@@ -154,16 +220,16 @@ def get_colour(party_name):
         GRN="#008943",
         PHON="#f36c21",
     )
-    return colours[party_name]
+    return colours[party_name[:3]]
 
 
-def make_all_state_space_plots(trace, data, df, election_date, parties):
+def make_all_state_space_plots(trace, data, df, election_date, parties, title):
 
     fig, ax = plt.subplots(figsize=(10, 6), layout="constrained")
     for p, party in enumerate(parties):
         colour = get_colour(party)
         tmp_data = data.copy()
-        party_mask = data["party_index"] == p + 1
+        party_mask = (data["party_index"] == p + 1).reset_index(drop=True).values
         tmp_data["poll_result"] = data["poll_result"].loc[party_mask]
         tmp_data["N_days"] = data["N_days"].loc[party_mask]
         tmp_data["poll_variance"] = data["poll_variance"].loc[party_mask]
@@ -182,7 +248,7 @@ def make_all_state_space_plots(trace, data, df, election_date, parties):
             label=party,
         )
     ax.set_ylabel("Vote (%)", fontsize="large")
-    ax.set_title("First Preference Voting Intention", fontsize="xx-large", loc="left")
+    ax.set_title(title, fontsize="xx-large", loc="left")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%b"))
     ax.legend()
     # Rotates and right-aligns the x labels so they don't crowd each other.
@@ -370,3 +436,66 @@ def make_current_latent_value_plot(trace, parties):
     fig.suptitle("Current First Preference Voting Intention")
 
     return fig, ax
+
+
+# make a plot for all states in a given party
+def plot_state_space_debug(
+    trace,
+    df,
+    election_data,
+    party_name,
+    states=["NAT", "VIC", "NSW", "WA", "SA", "QLD"],
+    ci_interval=0.95,
+):
+    alpha = (1 - ci_interval) / 2
+    mu = trace.posterior.mu
+    means = mu.mean(("chain", "draw")) * 100
+    lower = mu.quantile(alpha, dim=("chain", "draw")) * 100
+    upper = mu.quantile(1 - alpha, dim=("chain", "draw")) * 100
+
+    fig, axs = plt.subplots(constrained_layout=True, ncols=3, nrows=2, figsize=(17, 5))
+
+    x_coords = trace.posterior.coords["time"].values
+    for ax, state in zip(axs.ravel(), states):
+        name = f"{party_name}_{state}"
+        polls = df.loc[df.Party_Scope == name]
+        ax.plot(
+            x_coords,
+            means.sel(party=name),
+            linewidth=3.0,
+            label=state,
+            zorder=10,
+            c=get_colour(name),
+        )
+        ax.fill_between(
+            x_coords,
+            lower.sel(party=name),
+            upper.sel(party=name),
+            alpha=0.3,
+            facecolor=get_colour(name),
+        )
+        ax.set_title(state)
+        ax.errorbar(
+            polls["N_Days"],
+            polls["PollResult"],
+            yerr=np.sqrt(polls.PollVariance) * 100,
+            marker="None",
+            linestyle="None",
+            zorder=1,
+            c="k",
+        )
+        ax.scatter(polls["N_Days"], polls["PollResult"], zorder=2, c="k")
+
+        # add the election result
+        ax.scatter(
+            [0],
+            [election_data.loc[election_data.Party_Scope == name, "PollResult"]],
+            s=150,
+            c="orange",
+            zorder=10,
+        )
+
+    # labelLines(ax.get_lines(), zorder=2.5)
+    fig.suptitle(party_name)
+
+    return fig, axs
