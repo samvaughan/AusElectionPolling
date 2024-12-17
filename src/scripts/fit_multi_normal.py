@@ -31,7 +31,7 @@ df = pd.read_csv(
 if first_pref_or_2pp == "first_preference":
     # party_columns = ["ALP", "LNP", "GRN"]  # PHON
     party_columns = ["ALP", "LNP", "GRN"]
-    states = ["NAT", "VIC"]  # , "NSW", "WA", "SA", "QLD", "TAS"]
+    states = ["NAT", "NSW", "VIC", "WA", "SA", "QLD"]
 
 elif first_pref_or_2pp == "2pp":
     party_columns = ["ALP_2pp", "LNP_2pp"]
