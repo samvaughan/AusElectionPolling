@@ -4,8 +4,17 @@ from selenium.webdriver.chrome.options import ChromiumOptions
 import pandas as pd
 import numpy as np
 
+from src.scripts import logging_config
+
+logger = logging_config.Logger().get_logger()
+
+
 URL = "https://www.pollbludger.net/fed2025/bludgertrack/polldata.htm?"
 output_filename = "src/data/Polls/poll_data_latest.csv"
+
+logger.debug(f"URL: {URL}")
+logger.debug(f"output_filename: {output_filename}")
+
 
 # Columns in the table
 # everything with the r/a are the respondents preference choices
@@ -29,22 +38,24 @@ columns = [
     "UND r/a",
 ]
 
+logger.debug(f"columns: {columns}")
+
 options = ChromiumOptions()
 options.add_argument("--headless=new")
 driver = webdriver.Chrome(options=options)
 
 
-print("Loading the webpage...")
+logger.info("Loading the webpage...")
 driver.get(URL)
 
 
 df = pd.DataFrame()
-print("Parsing the HTML")
+logger.info("Parsing the HTML")
 for state in [None, "nsw", "vic", "qld", "wa", "sa", "tas"]:
 
     # Parse the HTML
     if state is not None:
-        print(f"\tState: {state}")
+        logger.info(f"\tState: {state}")
         button = driver.find_element(by="id", value=state)
         button.click()
     page_source = driver.page_source
@@ -62,7 +73,7 @@ for state in [None, "nsw", "vic", "qld", "wa", "sa", "tas"]:
 
 driver.quit()
 
-print("Changing the column types...")
+logger.info("Changing the column types...")
 # Fix up our column types
 df.loc[:, ["StartDate", "EndDate"]] = df.loc[:, ["StartDate", "EndDate"]].apply(
     pd.to_datetime, format="mixed", errors="coerce"
@@ -108,6 +119,6 @@ df = df.drop(
 )
 
 # Save the data
-print(f"Saving to {output_filename}")
+logger.info(f"Saving to {output_filename}")
 df.to_csv(output_filename)
-print("Done!")
+logger.info("Done!")

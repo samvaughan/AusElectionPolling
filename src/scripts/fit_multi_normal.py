@@ -9,6 +9,11 @@ import pickle
 from src.scripts import utils
 from src.scripts import file_paths as fp
 
+from src.scripts import logging_config
+
+logger = logging_config.Logger().get_logger()
+
+
 first_pref_or_2pp = "first_preference"
 
 prediction_date = datetime.today()
@@ -19,7 +24,7 @@ date = prediction_date.strftime("%Y%m%d")
 netcdf_filename, model_data_filename, model_df_filename, election_data_filename = (
     fp.get_filenames(date, first_pref_or_2pp=first_pref_or_2pp)
 )
-print(f"Saving fit to {netcdf_filename}\n")
+logger.info(f"Saving fit to {netcdf_filename}\n")
 
 
 df = pd.read_csv(
